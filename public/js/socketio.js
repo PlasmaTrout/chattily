@@ -10,11 +10,17 @@ socket.on("channel",function(data){
 	$("#testResultPanel").append("<p>"+data+"</p>");
 });
 
+socket.on("info",function(data){
+	$("#testResultPanel").append("<p>INFO: "+data+"</p>");
+});
+
 // The function to execute a message or command from the client side. It is possible that this
 // will be removed once a backbone implementation starts to form.
 var command = function(line) {
 
-	var cmdObj = {};
+	var cmdObj = {
+		user: "unknown"
+	};
 
 	// If the incoming line is an actual command its prefixed with a /
 	if (line.charAt(0) === "/") {
@@ -25,12 +31,15 @@ var command = function(line) {
 		parts.reverse();
 
 		cmdObj.command = parts.pop();
+		parts.reverse();
 		cmdObj.args = parts;
+		
 
 	} else {
 		// Otherwise the command is just a say command to the channel
-		cmdObj.command = "say";
+		cmdObj.command = "/say";
 		cmdObj.args = line;
+
 	}
 
 	socket.emit("command", cmdObj);

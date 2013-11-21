@@ -34,10 +34,24 @@ var io = require('socket.io').listen(socketServer);
 io.sockets.on('connection',function(socket){
 	sockets.push(socket);
 
+	// On a command, lookup the appropriate module and call execute on it. The
+	// arguments for execute should always be the same.
 	socket.on('command', function (data) {
-    	if(data.command === "say"){
-    		emit("channel", data.args);
+		try {
+    		var cmd = require('./modules'+data.command);
+    		var context = {
+	    		sockets: sockets
+	    	};
+
+	    	cmd.execute(data.user,data.args,context,function(data){
+	    		console.log(data);
+	    	});
+    	} catch(e) {
+    		console.log("Command not founnd: "+e);
+    		emit("info","Command not found");
     	}
+
+    
   	});
 });
 
