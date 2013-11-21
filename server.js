@@ -33,6 +33,12 @@ var io = require('socket.io').listen(socketServer);
 
 io.sockets.on('connection',function(socket){
 	sockets.push(socket);
+
+	socket.on('command', function (data) {
+    	if(data.command === "say"){
+    		emit("channel", data.args);
+    	}
+  	});
 });
 
 
