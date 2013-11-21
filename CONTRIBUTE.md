@@ -1,4 +1,4 @@
-# Contributing to HTML5 Boilerplate
+# Contributing to BrightChat
 
 Want to get involved?
 Thanks! There are plenty of ways you can help!
