@@ -1,3 +1,4 @@
+var settings = require('./settings.json');
 var express = require('express');
 var socket = require('socket.io');
 var http = require('http');
