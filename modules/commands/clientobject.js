@@ -9,7 +9,6 @@ exports.ClientObject = function(context){
 	return {
 		user: user,
 		type: type,
-		user: user,
 		room: room,
 		message: msg,
 		setMessage: function(message){

@@ -12,7 +12,8 @@ exports.execute = function(context, callback){
 				if(name){
 					nick = name;
 				}
-				ctx.setMessage(nick+": "+context.args);
+                ctx.user = nick;
+				ctx.setMessage(context.args);
 
 				context.sockets.in(context.channel).emit("channel",ctx);
 			});

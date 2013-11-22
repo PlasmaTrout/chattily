@@ -18,6 +18,7 @@ exports.execute = function(context, callback){
             if(name){
                 nick = name;
             }
+            ctx.user = nick;
 
 
             var dice_args = context.args.toString().toLowerCase().split('d');
@@ -31,7 +32,7 @@ exports.execute = function(context, callback){
                 total += val;
             }
             result += " total: "+total;
-            ctx.setMessage(nick+": "+result);
+            ctx.setMessage(result);
             context.sockets.in(context.channel).emit("channel",ctx);
         });
 

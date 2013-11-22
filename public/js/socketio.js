@@ -7,7 +7,7 @@ socket.on('health-check',function(data){
 });
 
 socket.on("channel",function(clientObj){
-	$("#testResultPanel").append("<div class='"+clientObj.type+"'>"+clientObj.message+"</div>");
+	$("#testResultPanel").append("<div class='"+clientObj.type+"'>"+clientObj.user+": "+clientObj.message+"</div>");
 });
 
 socket.on("info",function(data){
