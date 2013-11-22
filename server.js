@@ -78,6 +78,18 @@ app.get('/health', function(req, res){
   res.end(body);
 });
 
+app.get('/index', function(req,res){
+    res.sendfile('./views/index.html');
+});
+
+app.get('/login', function(req,res){
+    res.sendfile('./views/login.html');
+});
+
+app.get('/logout', function(req,res){
+    res.redirect('/login');
+});
+
 
 socketServer.listen(8080);
 
