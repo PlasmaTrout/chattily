@@ -1,0 +1,9 @@
+
+{
+    "ldap": {
+        "url" : "ldaprr.bhntampa.com",
+        "port" : 389,
+        "org" : "o=bhntampa",
+        "uid" : "cn"
+    }
+}
