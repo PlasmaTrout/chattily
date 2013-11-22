@@ -5,6 +5,7 @@ var http = require('http');
 var path = require('path');
 var socket = require('socket.io');
 var cm = require('./modules/restmodules/channels');
+var rauth = require('./modules/restmodules/auth');
 
 var app = express();
 
@@ -66,6 +67,8 @@ app.get('/rooms/list', function(req,res){
 app.get("/rooms/:room", function(req,res){
   cm.getSocketsInRoom(req,res,io.sockets);
 });
+
+app.post("/users/authenticate",rauth.authenticateUser);
 
 app.get('/health', function(req, res){
   var body = 'ok';
