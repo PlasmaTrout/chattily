@@ -37,7 +37,8 @@ io.sockets.on('connection',function(socket){
 	    		sockets: io.sockets,
           user: data.user,
           args: data.args,
-          channel: data.channel
+          channel: data.channel,
+          socket: socket
 	    	};
 
 	    	cmd.execute(context,function(data){
