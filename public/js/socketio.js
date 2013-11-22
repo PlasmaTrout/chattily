@@ -10,7 +10,7 @@ socket.on("channel",function(clientObj){
 	$("#testResultPanel").append("<div class='"+clientObj.type+"'>"+clientObj.user+": "+clientObj.message+"</div>");
 });
 
-socket.on("info",function(data){
+socket.on("info",function(clientObj){
 	$("#testResultPanel").append("<div class='informational'>INFO: "+clientObj.message+"</div>");
 });
 

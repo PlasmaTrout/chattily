@@ -10,17 +10,9 @@ var co = require("./clientobject");
 exports.execute = function(context, callback){
 
     var ctx = new co.ClientObject(context);
+    console.log(ctx);
 
     if(context.sockets){
-        context.socket.get("nickname",function(err, name){
-            var nick = "unknown";
-
-            if(name){
-                nick = name;
-            }
-            ctx.user = nick;
-
-
             var dice_args = context.args.toString().toLowerCase().split('d');
             var num_dice = dice_args[0];
             var type_dice = dice_args[1];
@@ -34,8 +26,6 @@ exports.execute = function(context, callback){
             result += " total: "+total;
             ctx.setMessage(result);
             context.sockets.in(context.channel).emit("channel",ctx);
-        });
-
     }
 
     callback();

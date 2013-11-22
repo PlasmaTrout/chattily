@@ -3,6 +3,8 @@ var ldauth = require('../../modules/authentication/ldap');
 
 exports.authenticateUser = function(req,res) {
 
+    var returnObj = { success: false };
+
 	var headers = req.headers;
 	console.log(headers);
 	var auth = new ldauth();
@@ -11,13 +13,14 @@ exports.authenticateUser = function(req,res) {
 
 	auth.login(headers.user,unencodedPass, function(err, user){
     	if(err){
+            returnObj.errors=err;
     		console.log("Error: "+err);
-    		res.send(err);
     	}
     	if(user){
-    		console.log(user);
-    		res.send(user);
+            returnObj.success=true;
+    		returnObj.user=user;
     	}
+        res.send(returnObj);
     	auth.close();
 	});
 };
