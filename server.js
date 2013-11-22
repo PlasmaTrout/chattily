@@ -80,15 +80,19 @@ app.get('/health', function(req, res){
 });
 
 app.get('/index', function(req,res){
-    res.sendfile('./views/index.html');
+    res.sendfile('./modules/views/index.html');
 });
 
 app.get('/login', function(req,res){
-    res.sendfile('./views/login.html');
+    res.sendfile('./modules/views/login.html');
 });
 
 app.get('/logout', function(req,res){
     res.redirect('/login');
+});
+
+app.get('/', function(req, res){
+    res.redirect('/index');
 });
 
 
