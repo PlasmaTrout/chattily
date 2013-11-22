@@ -28,7 +28,7 @@ exports.execute = function(context, callback){
             var total = 0;
             for(var i=0; i<num_dice; i++){
                 var val = Math.floor(Math.random()*type_dice)+1;
-                result += " "+i+"d"+type_dice+":"+val+" ";
+                result += " "+(i+1)+"d"+type_dice+":"+val+" ";
                 total += val;
             }
             result += " total: "+total;
