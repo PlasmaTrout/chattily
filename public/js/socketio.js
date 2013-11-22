@@ -19,7 +19,8 @@ socket.on("info",function(data){
 var command = function(line) {
 
 	var cmdObj = {
-		user: "unknown"
+		user: "unknown",
+		channel: "global"
 	};
 
 	// If the incoming line is an actual command its prefixed with a /

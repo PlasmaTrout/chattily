@@ -4,13 +4,12 @@ var http = require('http');
 
 var sockets = [];
 
-var emit = function(type,message) {
-        if(sockets){
-            sockets.forEach(function(sock){
-                sock.broadcast.emit(type,message);
-            });
+var emit = function(room,type,message) {
+        var to = room || "global";
+        if(io.sockets){
+            io.sockets.in(to).emit(type,message);
         }   
-};
+}; 
 
 var app = express();
 var path = require('path');
@@ -32,23 +31,30 @@ var socketServer = http.createServer(app);
 var io = require('socket.io').listen(socketServer);
 
 io.sockets.on('connection',function(socket){
-	sockets.push(socket);
+	
+  //console.log(socket);
+  socket.join('global');
 
 	// On a command, lookup the appropriate module and call execute on it. The
 	// arguments for execute should always be the same.
 	socket.on('command', function (data) {
 		try {
-    		var cmd = require('./modules'+data.command);
+        // Remember the command already has an / in it
+    		var cmd = require('./modules/commands'+data.command.toLowerCase());
     		var context = {
-	    		sockets: sockets
+	    		sockets: io.sockets,
+          user: data.user,
+          args: data.args,
+          channel: data.channel
 	    	};
 
-	    	cmd.execute(data.user,data.args,context,function(data){
+	    	cmd.execute(context,function(data){
 	    		console.log(data);
 	    	});
+
     	} catch(e) {
     		console.log("Command not founnd: "+e);
-    		emit("info","Command not found");
+    		emit("global","info","Command not found");
     	}
 
     
