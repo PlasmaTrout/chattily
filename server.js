@@ -38,7 +38,8 @@ io.sockets.on('connection',function(socket){
 	// arguments for execute should always be the same.
 	socket.on('command', function (data) {
 		try {
-    		var cmd = require('./modules'+data.command);
+        // Remember the command already has an / in it
+    		var cmd = require('./modules/commands'+data.command.toLowerCase());
     		var context = {
 	    		sockets: sockets
 	    	};
