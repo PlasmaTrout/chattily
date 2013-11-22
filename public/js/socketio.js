@@ -6,12 +6,12 @@ socket.on('health-check',function(data){
 	alert(data);
 });
 
-socket.on("channel",function(data){
-	$("#testResultPanel").append("<p>"+data+"</p>");
+socket.on("channel",function(clientObj){
+	$("#testResultPanel").append("<div class='"+clientObj.type+"'>"+clientObj.message+"</div>");
 });
 
 socket.on("info",function(data){
-	$("#testResultPanel").append("<p>INFO: "+data+"</p>");
+	$("#testResultPanel").append("<div class='informational'>INFO: "+clientObj.message+"</div>");
 });
 
 // The function to execute a message or command from the client side. It is possible that this

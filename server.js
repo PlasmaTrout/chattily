@@ -35,6 +35,7 @@ io.sockets.on('connection',function(socket){
     		var cmd = require('./modules/commands'+data.command.toLowerCase());
     		var context = {
 	    		sockets: io.sockets,
+          command: data.command,
           user: data.user,
           args: data.args,
           channel: data.channel,
@@ -46,7 +47,7 @@ io.sockets.on('connection',function(socket){
 	    	});
 
     	} catch(e) {
-    		console.log("Command not founnd: "+e);
+    		console.log("Command not found: "+e);
     		emit("global","info","Command not found");
     	}
 
