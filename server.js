@@ -41,7 +41,8 @@ io.sockets.on('connection',function(socket){
           user: data.user,
           args: data.args,
           channel: data.channel,
-          socket: socket
+          socket: socket,
+          timestamp: new Date().toJSON()
 	    	};
 
 	    	cmd.execute(context,function(data){
