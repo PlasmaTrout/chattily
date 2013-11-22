@@ -1,8 +1,11 @@
 var express = require('express');
 var socket = require('socket.io');
 var http = require('http');
+var path = require('path');
+var socket = require('socket.io');
+var cm = require('./modules/restmodules/channels');
 
-var sockets = [];
+var app = express();
 
 var emit = function(room,type,message) {
         var to = room || "global";
@@ -11,21 +14,10 @@ var emit = function(room,type,message) {
         }   
 }; 
 
-var app = express();
-var path = require('path');
-var socket = require('socket.io');
-var http = require('http');
+
 
 app.use(express.bodyParser());
 app.use(express.static(path.join(__dirname,'public')));
-
-app.get('/health', function(req, res){
-  var body = 'ok';
-  res.setHeader('Content-Type', 'text/plain');
-  res.setHeader('Content-Length', body.length);
-  emit('health-check',{success: true});
-  res.end(body);
-});
 
 var socketServer = http.createServer(app);
 var io = require('socket.io').listen(socketServer);
@@ -61,6 +53,24 @@ io.sockets.on('connection',function(socket){
   	});
 });
 
+// HTTP Definitions
+// TODO: Refactor these somewhere more elegant
+
+app.get('/rooms/list', function(req,res){
+  cm.getActiveRooms(req,res,io.sockets);
+});
+
+app.get("/rooms/:room", function(req,res){
+  cm.getSocketsInRoom(req,res,io.sockets);
+});
+
+app.get('/health', function(req, res){
+  var body = 'ok';
+  res.setHeader('Content-Type', 'text/plain');
+  res.setHeader('Content-Length', body.length);
+  emit('health-check',{success: true});
+  res.end(body);
+});
 
 
 socketServer.listen(8080);
