@@ -1,10 +1,8 @@
 
-exports.execute = function(user, args, context, callback){
+exports.execute = function(context, callback){
 	
 	if(context.sockets){
-            context.sockets.forEach(function(sock){
-                sock.broadcast.emit("channel",user+" "+args.join(' '));
-            });
+        context.sockets.in(context.channel).emit("channel",context.user+" "+context.args.join(' '));
     }
 
     callback();
