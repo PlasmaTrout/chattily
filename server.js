@@ -6,7 +6,7 @@ var path = require('path');
 var socket = require('socket.io');
 var cm = require('./modules/restmodules/channels');
 var rauth = require('./modules/restmodules/auth');
-
+var user_utils = require('./modules/utils/user');
 var app = express();
 
 var emit = function(room,type,message) {
@@ -16,8 +16,8 @@ var emit = function(room,type,message) {
         }   
 }; 
 
-
-
+var user = new user_utils();
+app.use(express.cookieParser());
 app.use(express.bodyParser());
 app.use(express.static(path.join(__dirname,'public')));
 
@@ -79,20 +79,24 @@ app.get('/health', function(req, res){
   res.end(body);
 });
 
-app.get('/index', function(req,res){
-    res.sendfile('./modules/views/index.html');
-});
-
 app.get('/login', function(req,res){
     res.sendfile('./modules/views/login.html');
 });
 
 app.get('/logout', function(req,res){
+    res.clearCookie('sec',null);
     res.redirect('/login');
 });
 
 app.get('/', function(req, res){
-    res.redirect('/index');
+    if(req.cookies){
+        if(req.cookies.sec){
+            res.sendfile('./modules/views/index.html');
+        } else {
+            res.redirect('/login');
+        }
+    }
+
 });
 
 

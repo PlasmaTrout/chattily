@@ -25,7 +25,7 @@
 
         <!-- This code is taken from http://twitter.github.com/bootstrap/examples/hero.html -->
 
-        <nav class="navbar navbar-default" role="navigation">
+        <nav class="navbar navbar-default navbar-static-top" role="navigation">
           <!-- Brand and toggle get grouped for better mobile display -->
           <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
@@ -34,21 +34,25 @@
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">BrightChat Test Page</a>
+            <a class="navbar-brand" href="#">BrightChat</a>
           </div>
+          <span class="navbar-text navbar-right" style="margin-top:8px; margin-bottom:8px; height:20px">
+              <span id="signed_in_as"></span>
+              <button type="button" id="logout" class="btn btn-danger btn-xs navbar-btn">Logout</button>
+              </span>
+
         </nav>
           <div class="container">
           <div class="row" style="margin-top: 20px;">
             <div class="panel panel-default" style="height: 400px;">
               <div class="panel-heading">
-                <h3 class="panel-title">Test Results</h3>
+                <h3 class="panel-title">Chat</h3>
               </div>
-              <div class="panel-body" id="testResultPanel">
+              <div class="panel-body pre-scrollable" style="vertica-align:bottom"><div id="testResultPanel" style="vertical-align:bottom;"></div>
               </div>  
             </div>
           </div>
           <div class="row">
-             <label for="exampleInputEmail1">Command Tester</label>
             <div class="input-group">
               <input type="text" class="form-control" id="chatLine" placeholder="enter your message or command here">
               <span class="input-group-btn">
@@ -63,6 +67,10 @@
         <script>window.jQuery || document.write('<script src="./js/vendor/jquery-1.10.2.min.js"><\/script>')</script>
 
         <script src="/js/vendor/bootstrap.min.js"></script>
+        <script src="/js/vendor/cookies.js"></script>
+        <script src="./js/base64.js"></script>
+        <script src="/js/vendor/json2.js"></script>
+        <script src="/js/app/app.js"></script>
         <script src="/js/socketio.js"></script>
 
         <script>

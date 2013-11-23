@@ -9,10 +9,12 @@ socket.on('health-check',function(data){
 socket.on("channel",function(clientObj){
 	var date = new Date(clientObj.timestamp);
 	$("#testResultPanel").append("<div class='"+clientObj.type+"'>"+date.toLocaleTimeString()+" "+clientObj.user+": "+clientObj.message+"</div>");
+    $(".panel-body").animate({ scrollTop: $('.panel-body')[0].scrollHeight}, 100);
 });
 
 socket.on("info",function(clientObj){
 	$("#testResultPanel").append("<div class='informational'>INFO: "+clientObj.message+"</div>");
+    $(".panel-body").animate({ scrollTop: $('.panel-body')[0].scrollHeight}, 100);
 });
 
 // The function to execute a message or command from the client side. It is possible that this
@@ -20,7 +22,7 @@ socket.on("info",function(clientObj){
 var command = function(line) {
 
 	var cmdObj = {
-		user: "unknown",
+		user: App.settings.user.name,
 		channel: "global"
 	};
 
@@ -47,4 +49,15 @@ var command = function(line) {
 	socket.emit("command", cmdObj);
 
 	return false;
-}
+};
+$('input[type=text]').on('keyup', function(e) {
+    if (e.which == 13) {
+        e.preventDefault();
+        command($('input[type=text]').val());
+        $('input[type=text]').val("");
+    }
+});
+
+$('#logout').on('click',function(e){
+   window.location = '/logout';
+});

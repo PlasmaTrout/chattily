@@ -67,10 +67,10 @@
 
 <div class="container">
 
-    <form class="form-signin">
+    <form class="form-signin" id="login-form">
         <h2 class="form-signin-heading">Please sign in</h2>
-        <input type="text" class="form-control" placeholder="LDAP User" required autofocus>
-        <input type="password" class="form-control" placeholder="LDAP Password" required>
+        <input type="text" id="form-u" class="form-control" placeholder="LDAP User" required autofocus>
+        <input type="password" id="form-p" class="form-control" placeholder="LDAP Password" required>
         <label class="checkbox">
             <input type="checkbox" value="remember-me"> Remember me
         </label>
@@ -84,6 +84,10 @@
 <!-- Placed at the end of the document so the pages load faster -->
 <script src="./js/vendor/jquery-1.10.2.min.js"></script>
 <script src="./js/vendor/bootstrap.min.js"></script>
+<script src="./js/vendor/cookies.js"></script>
+<script src="./js/app/app.js"></script>
+<script src="./js/base64.js"></script>
+<script src="./js/app/login.js"></script>
 
 </body>
 </html>
