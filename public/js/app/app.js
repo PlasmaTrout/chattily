@@ -10,6 +10,18 @@ if (!App) var App = {};
 
 App.settings = {
 };
+App.templates = {};
+
+function load_template(name, path){
+    $.ajax({
+        url: path,
+        async: false,
+        success: function(contents){
+            App.templates[name] = contents;
+        }
+    })
+}
+
 
 cookie_sec = function(action,str){
     var action = action || 'enc';
@@ -23,5 +35,7 @@ if(user !== null){
         signed_in_as.text(App.settings.user.fullName);
     }
 }
+
+
 
 

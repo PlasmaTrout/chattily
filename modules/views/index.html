@@ -15,8 +15,9 @@
         <link rel="stylesheet" href="./css/bootstrap.min.css">
         <script src="./js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
         <script src="./js/vendor/underscore-min.js"></script>
-        <script src="./js/vendor/backbone-min.js"></script>
+
         <script src="/socket.io/socket.io.js"></script>
+
     </head>
     <body>
         <!--[if lt IE 7]>
@@ -43,36 +44,33 @@
 
         </nav>
           <div class="container">
-          <div class="row" style="margin-top: 20px;">
-            <div class="panel panel-default" style="height: 400px;">
-              <div class="panel-heading">
-                <h3 class="panel-title">Chat</h3>
-              </div>
-              <div class="panel-body pre-scrollable" style="vertica-align:bottom"><div id="testResultPanel" style="vertical-align:bottom;"></div>
-              </div>  
-            </div>
-          </div>
-          <div class="row">
-            <div class="input-group">
-              <input type="text" class="form-control" id="chatLine" placeholder="enter your message or command here">
-              <span class="input-group-btn">
-                 <button type="button" class="btn btn-default" onclick="command(document.getElementById('chatLine').value);">Submit</button>  
-              </span>
-            </div>
-            
-          </div>
-        </div>
+            <div id="view">
 
+            </div>
+          </div>
+        <script src="/js/vendor/underscore.js"></script>
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
         <script>window.jQuery || document.write('<script src="./js/vendor/jquery-1.10.2.min.js"><\/script>')</script>
 
-        <script src="/js/vendor/bootstrap.min.js"></script>
+        <script src="./js/vendor/backbone-min.js"></script>
+        <script src="./js/vendor/require-jquery.js"></script>
+
         <script src="/js/vendor/cookies.js"></script>
         <script src="./js/base64.js"></script>
         <script src="/js/vendor/json2.js"></script>
+        <script src="/js/jparcel.js"></script>
         <script src="/js/app/app.js"></script>
-        <script src="/js/socketio.js"></script>
+        <script>
+            //Template Definitions go here
+            load_template("ChatViewTemplate", "/templates/ChatView.html");
 
+        </script>
+        <script src="./js/app/services/client.js"></script>
+        <script src="./js/app/services/clientDataProcessor.js"></script>
+        <script src="/js/vendor/bootstrap.js"></script>
+        <script src="/js/app/ui/ChatView.js"></script>
+
+        <script src="/js/main.js"></script>
         <script>
             var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
             (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
