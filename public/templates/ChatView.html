@@ -1,20 +1,31 @@
 
-    <div class="row" style="margin-top: 20px;">
-        <div class="panel panel-default" style="height: 400px;">
-            <div class="panel-heading">
-                <h3 class="panel-title">Chat</h3>
-            </div>
-            <div class="panel-body pre-scrollable" style="vertical-align:bottom"><div id="testResultPanel" style="vertical-align:bottom;"></div>
+    <div class="row">
+        <div class="col-xs-8 col-md-9 col-lg-10">
+            <div class="panel panel-default" style="height: 400px;">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Chat</h3>
+                </div>
+                <div class="panel-body pre-scrollable" style="vertical-align:bottom"><div id="testResultPanel" style="vertical-align:bottom;"></div>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="input-group">
-            <input type="text" class="form-control" id="chatLine" placeholder="enter your message or command here">
+        <div id="UsersView" class="col-xs-4 col-md-2 col-lg-2">
+
+        </div>
+        <div class="col-xs-10 col-md-11 col-lg-12">
+            <div class="btn-group btn-group-xs">
+                <button type="button" class="btn btn-default btn-xs" id="bold"><span class="glyphicon glyphicon-bold"></span></button>
+                <button type="button" class="btn btn-default btn-xs" id="italic"><span class="glyphicon glyphicon-italic"></span></button>
+                <button type="button" class="btn btn-default btn-xs" id="underline"><span class="glyphicon glyphicon-text-width"></span></button>
+                <span class="hint">BBCode supported [b] [i] [u] [color={color}] - urls and images will parse automatically</span>
+            </div>
+            <div class="input-group">
+                <input type="text" class="form-control" id="chatLine" placeholder="enter your message or command here">
               <span class="input-group-btn">
                  <button type="button" id="submit" class="btn btn-default">Submit</button>
               </span>
+            </div>
         </div>
-
     </div>
+
 

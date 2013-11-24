@@ -10,13 +10,16 @@
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width">
 
-        <link rel="stylesheet" href="./css/bootstrap.min.css">
-        
-        <link rel="stylesheet" href="./css/bootstrap.min.css">
+
+        <link rel="stylesheet" href="./css/bootstrap.css">
+        <link rel="stylesheet" href="./css/bootstrap-theme.css">
+        <link rel="stylesheet" href="./css/jbbcode.css">
+        <link rel="stylesheet" href="./css/app.css">
         <script src="./js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
         <script src="./js/vendor/underscore-min.js"></script>
 
         <script src="/socket.io/socket.io.js"></script>
+        <script src="/js/date.js"></script>
 
     </head>
     <body>
@@ -43,18 +46,20 @@
               </span>
 
         </nav>
+        <div class="page" style="padding: 0 15px;">
           <div class="container">
             <div id="view">
 
             </div>
           </div>
+        </div>
         <script src="/js/vendor/underscore.js"></script>
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
         <script>window.jQuery || document.write('<script src="./js/vendor/jquery-1.10.2.min.js"><\/script>')</script>
 
         <script src="./js/vendor/backbone-min.js"></script>
         <script src="./js/vendor/require-jquery.js"></script>
-
+        <script src="./js/vendor/jbbcode.js"></script>
         <script src="/js/vendor/cookies.js"></script>
         <script src="./js/base64.js"></script>
         <script src="/js/vendor/json2.js"></script>
@@ -63,12 +68,14 @@
         <script>
             //Template Definitions go here
             load_template("ChatViewTemplate", "/templates/ChatView.html");
+            load_template("UsersViewTemplate", "/templates/UsersView.html");
 
         </script>
         <script src="./js/app/services/client.js"></script>
         <script src="./js/app/services/clientDataProcessor.js"></script>
         <script src="/js/vendor/bootstrap.js"></script>
         <script src="/js/app/ui/ChatView.js"></script>
+        <script src="/js/app/ui/UsersView.js"></script>
 
         <script src="/js/main.js"></script>
         <script>

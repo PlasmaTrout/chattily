@@ -7,5 +7,12 @@
  */
 $(function(){
     var chatView = new app.ui.ChatView({ el: $('#view') });
+    var usersView = new app.ui.UsersView({ el: $('#UsersView') });
     App.chatView = chatView;
+    App.usersView = usersView;
+
+    $("#logout").on("click",function(e){
+        e.preventDefault();
+        window.location = "/logout";
+    })
 });

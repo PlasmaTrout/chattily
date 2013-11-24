@@ -1,0 +1,15 @@
+
+
+
+.thumb {
+    max-height:120px;
+    max-width:120px;
+    vertical-align:top;
+    border:0px;
+}
+
+.hint {
+    font-size:0.8em;
+    color:grey;
+    margin:2px;
+}
