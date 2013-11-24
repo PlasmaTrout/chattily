@@ -9,11 +9,13 @@ exports.getActiveRooms = function(req,res,sockets) {
 
 exports.getSocketsInRoom = function(req,res,sockets) {
 	var room = req.params.room;
+    var users = {};
 	if(sockets) {
 		var ids = sockets.clients(room).map(function(item){
-			return item.id;
+            return item.store.data.username;
 		});
-		res.send(ids);
+        users.users = ids;
+		res.send(users);
 	}else{
 		res.send({});
 	}

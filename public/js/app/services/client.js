@@ -16,11 +16,15 @@ jpackage("app.services", function(){
        this.connect = function(){
            var _this = this;
            this.socket = io.connect();
+           this.socket.emit("auth", {"user":App.settings.user.name, "pass":App.settings.user.enc_pass});
            this.socket.on("channel",function(clientObj){
                _this._data(clientObj);
            });
            this.socket.on("info",function(clientObj){
                _this.info(clientObj);
+           });
+           this.socket.on("rejected",function(clientObj){
+              window.location = "/logout";
            });
        };
        this.send = function(command){
@@ -32,7 +36,7 @@ jpackage("app.services", function(){
            if (command.charAt(0) === "/") {
                // First split the spaces and then reverse so we can pop out
                // the actual command.
-               var parts = line.split(' ');
+               var parts = command.split(' ');
                parts.reverse();
                cmdObj.command = parts.pop();
                parts.reverse();

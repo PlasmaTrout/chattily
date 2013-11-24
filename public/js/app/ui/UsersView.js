@@ -21,12 +21,23 @@ jpackage("app.ui", function() {
         initialize: function() {
             // console.log("initialize");
             _.bindAll(this);
-            this.render();
+            this.getUsers();
 
             // var _this = this;
         },
         render: function() {
-            this.$el.html(this.template(this.data));
+            this.$el.html(this.template({users: this.data}));
+        },
+        getUsers: function(){
+            var _this = this;
+            $.ajax({
+               url: '/rooms/global',
+               success: function(data){
+                   _this.data = data;
+                   _this.render();
+                   setTimeout(_this.getUsers, 1000);
+               }
+            });
         }
 
     });

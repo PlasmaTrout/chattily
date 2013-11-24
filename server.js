@@ -6,7 +6,7 @@ var path = require('path');
 var socket = require('socket.io');
 var cm = require('./modules/restmodules/channels');
 var rauth = require('./modules/restmodules/auth');
-var user_utils = require('./modules/utils/user');
+var users = require('./modules/collections/users');
 var app = express();
 
 var emit = function(room,type,message) {
@@ -16,7 +16,6 @@ var emit = function(room,type,message) {
         }   
 }; 
 
-var user = new user_utils();
 app.use(express.cookieParser());
 app.use(express.bodyParser());
 app.use(express.static(path.join(__dirname,'public')));
@@ -27,7 +26,23 @@ var io = require('socket.io').listen(socketServer);
 io.sockets.on('connection',function(socket){
 	
   //console.log(socket);
-  socket.join('global');
+    socket.on('auth', function(data){
+        if(!data.user || !data.pass){
+            socket.emit("rejected");
+        }
+        var user = rauth.socketAuthentication(data.user, data.pass);
+        if(user !== null){
+            users.addUser(data.user, socket.id);
+            socket.set("username", data.user, function(){
+                console.log(socket);
+                socket.join('global');
+            });
+        } else {
+            socket.emit("rejected");
+        }
+
+    });
+
 
 	// On a command, lookup the appropriate module and call execute on it. The
 	// arguments for execute should always be the same.

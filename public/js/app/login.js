@@ -22,7 +22,7 @@ $(document).ready(function(){
                     App.settings.user.name = data.user.cn;
                     App.settings.user.fullName = data.user.fullName;
                     App.settings.user.email = data.user.mail;
-
+                    App.settings.user.enc_pass = base64.encode(encodeURIComponent($("#form-p").val()));
                     CookieUtil.write("sec", JSON.stringify(App.settings.user), null, '/', null);
                     window.location = "/";
                 } else {
