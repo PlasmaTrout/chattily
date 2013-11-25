@@ -1,11 +1,11 @@
 
     <div class="row">
         <div class="col-xs-8 col-md-9 col-lg-10">
-            <div class="panel panel-default" style="height: 400px;">
+            <div class="panel panel-default" style="height: 100%; max-height:100%;">
                 <div class="panel-heading">
                     <h3 class="panel-title">Chat</h3>
                 </div>
-                <div class="panel-body pre-scrollable" style="vertical-align:bottom"><div id="testResultPanel" style="vertical-align:bottom;"></div>
+                <div class="panel-body pre-scrollable" style="vertical-align:bottom; height: 600px; max-height:600px;"><div id="testResultPanel" style="height: 600px; max-height:600px; vertical-align:bottom;"></div>
                 </div>
             </div>
         </div>
@@ -17,8 +17,8 @@
                 <button type="button" class="btn btn-default btn-xs" id="bold"><span class="glyphicon glyphicon-bold"></span></button>
                 <button type="button" class="btn btn-default btn-xs" id="italic"><span class="glyphicon glyphicon-italic"></span></button>
                 <button type="button" class="btn btn-default btn-xs" id="underline"><span class="glyphicon glyphicon-text-width"></span></button>
-                <span class="hint">BBCode supported: [b] [i] [u] [color={color}] | urls and images will parse automatically</span>
             </div>
+            <span class="hint">BBCode supported: [b] [i] [u] [color={color}] | urls and images will parse automatically</span>
             <div class="input-group">
                 <input type="text" class="form-control" id="chatLine" placeholder="enter your message or command here">
               <span class="input-group-btn">

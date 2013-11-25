@@ -12,7 +12,7 @@ exports.getSocketsInRoom = function(req,res,sockets) {
     var users = {};
 	if(sockets) {
 		var ids = sockets.clients(room).map(function(item){
-            return item.store.data.username;
+            return { "username":item.store.data.username, "id":item.id, "email":item.store.data.email };
 		});
         users.users = ids;
 		res.send(users);

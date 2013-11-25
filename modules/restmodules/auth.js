@@ -25,16 +25,20 @@ exports.authenticateUser = function(req,res) {
 	});
 };
 
-exports.socketAuthentication = function(user, pass){
+exports.socketAuthentication = function(user, pass, fn){
     var unencodedPass = decodeURIComponent(base64.decode(pass));
     var auth = new ldauth();
-    auth.login(user,unencodedPass, function(err, user){
+    auth.login(user, unencodedPass, function(err, user){
+        var retObj = {};
+        retObj.success = false;
         if(err){
-            return null;
+            retObj.error = err;
         }
         if(user){
-            return user;
+            retObj.user = user;
+            retObj.success = true;
         }
         auth.close();
+        fn(retObj);
     });
 }

@@ -26,7 +26,7 @@ jpackage("app.ui", function() {
             // var _this = this;
         },
         render: function() {
-            this.$el.html(this.template({users: this.data}));
+            this.$el.html(this.template(this.data));
         },
         getUsers: function(){
             var _this = this;

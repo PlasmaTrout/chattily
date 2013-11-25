@@ -12,16 +12,19 @@ jpackage("app.services", function(){
            var date = new Date(data.timestamp);
            var div = $('<div></div>');
            var container = $(el);
-           div.addClass(data.type);                                                    //escape html lt & gt symbols to prevent html text - see jbbcode in _process
-           div.html(this._process(DateUtil.formatDate(date, "hh:nn:ss"), data.user,(data.message.replace(/</g, "&lt;").replace(/>/g, "&gt;"))));
+           div.addClass(data.type.replace('/',''));                                                    //escape html lt & gt symbols to prevent html text - see jbbcode in _process
+           div.html(this._process(data.type, DateUtil.formatDate(date, "hh:nn:ss"), data.user,(data.message.replace(/</g, "&lt;").replace(/>/g, "&gt;"))));
            div.html(this._imgify(div));
            container.append(div);
            container.parent().animate({ scrollTop: container.parent()[0].scrollHeight}, 100);
        };
 
-       this._process = function(time, user, message){
+       this._process = function(type, time, user, message){
            var mention_start = "";
            var mention_end = "";
+           if(type === "emote"){
+               return time + ": "+user+" "+message;
+           }
            if(user !== App.settings.user.name){
                if(message.indexOf(App.settings.user.name) > 0){
                    mention_start = "<span style=\"background:#5b0000\">"
@@ -29,7 +32,7 @@ jpackage("app.services", function(){
                }
            }
            var result = JBBCODE.process({
-               text: "[color=grey]"+time+"[/color]: [color=blue]"+user+"[/color] - [color=black]"+message+"[/color]",
+               text: "[color=grey]"+time+"[/color]: [color=blue]"+user+"[/color] - "+message+"",
                removeMisalignedTags: false,
                addInLineBreaks: false
            });

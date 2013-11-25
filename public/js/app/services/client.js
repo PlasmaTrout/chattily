@@ -13,15 +13,27 @@ jpackage("app.services", function(){
        this._data = function(data){
            this._dataProcessor._data(data);
        };
+       this._info = function(message){
+           var div = $('<div></div>');
+           var container = $('#testResultPanel');
+           div.addClass("info");
+           div.html(message);
+           container.append(div);
+           container.parent().animate({ scrollTop: container.parent()[0].scrollHeight}, 100);
+       }
        this.connect = function(){
            var _this = this;
            this.socket = io.connect();
            this.socket.emit("auth", {"user":App.settings.user.name, "pass":App.settings.user.enc_pass});
+           setTimeout(function(){_this._info('<br/>Joined Channel!')}, 500);
            this.socket.on("channel",function(clientObj){
                _this._data(clientObj);
            });
+           this.socket.on("private_message",function(clientObj){
+               _this._data(clientObj);
+           });
            this.socket.on("info",function(clientObj){
-               _this.info(clientObj);
+               _this._info(clientObj);
            });
            this.socket.on("rejected",function(clientObj){
               window.location = "/logout";
@@ -50,17 +62,5 @@ jpackage("app.services", function(){
            this.socket.emit("command", cmdObj);
            return false;
        };
-       this.users = function(){
-           $.ajax({
-               url:'',
-               success: function(data){
-                  return data;
-               },
-               error: function(err){
-                   console.log(err);
-                   return err;
-               }
-           })
-       }
    };
 });

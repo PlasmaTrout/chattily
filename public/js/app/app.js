@@ -15,7 +15,7 @@ App.templates = {};
 function load_template(name, path){
     $.ajax({
         url: path,
-        async: false,
+
         success: function(contents){
             App.templates[name] = contents;
         }

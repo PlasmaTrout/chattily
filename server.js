@@ -30,16 +30,18 @@ io.sockets.on('connection',function(socket){
         if(!data.user || !data.pass){
             socket.emit("rejected");
         }
-        var user = rauth.socketAuthentication(data.user, data.pass);
-        if(user !== null){
-            users.addUser(data.user, socket.id);
-            socket.set("username", data.user, function(){
-                console.log(socket);
-                socket.join('global');
-            });
-        } else {
-            socket.emit("rejected");
-        }
+        rauth.socketAuthentication(data.user, data.pass, function(ret){
+            if(ret.success && ret.user){
+                users.addUser(data.user, socket.id);
+                socket.set("username", data.user, function(){
+                    socket.set("email", ret.user.mail, function(){});
+                    socket.join('global');
+                    socket.join(data.user);
+                });
+            } else {
+                socket.emit("rejected");
+            }
+        });
 
     });
 
@@ -61,7 +63,7 @@ io.sockets.on('connection',function(socket){
 	    	};
 
 	    	cmd.execute(context,function(data){
-	    		console.log(data);
+	    		//console.log(data);
 	    	});
 
     	} catch(e) {
@@ -71,6 +73,14 @@ io.sockets.on('connection',function(socket){
 
     
   	});
+    socket.on('join', function(data){
+        socket.join(data.room);
+        socket.broadcast.to(data.room).emit("joined", socket.store.data.nickname);
+    });
+    socket.on('leave', function(data){
+        socket.leave(data.room);
+        socket.broadcast.to(data.room).emit("left", socket.store.data.nickname);
+    });
 });
 
 // HTTP Definitions

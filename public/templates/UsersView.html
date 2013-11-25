@@ -1,10 +1,10 @@
-<div class="panel panel-default " style="height: 400px;">
+<div class="panel panel-default " style="height: 100%; max-height:100%;">
     <div class="panel-heading">
         <h3 class="panel-title">Users</h3>
     </div>
     <div class="panel-body pre-scrollable" style="vertical-align:top"><div id="userPanel" style="vertical-align:top;">
     <% _.each(users, function(u){ %>
-        <span style="font-size:0.9em;"><%= u %></span><br/>
+        <span style="font-size:0.9em;"><%= u.username %></span><br/>
     <% }); %>
     </div>
     </div>

@@ -8,13 +8,20 @@
 
 
 
-var _users = {};
+GLOBAL._users = {};
 exports.addUser = function(name, socketId){
-    _users[socketId] = name;
+    GLOBAL._users[socketId] = name;
 };
 exports.getUser = function(socketId){
-    return _users[socketId];
+    return GLOBAL._users[socketId];
 };
+exports.getSocketIdForUser = function(username){
+    for(var u in GLOBAL._users){
+        if(GLOBAL._users[u] === username){
+            return u;
+        }
+    }
+}
 exports.getRoomsForUser = function(socketId){
     return io.sockets.manager.rooms.map(function(item){
         console.log(item);

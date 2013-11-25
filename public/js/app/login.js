@@ -26,12 +26,18 @@ $(document).ready(function(){
                     CookieUtil.write("sec", JSON.stringify(App.settings.user), null, '/', null);
                     window.location = "/";
                 } else {
-
+                    $(".alert").fadeIn(function(){
+                        setTimeout(function(){$(".alert").fadeOut();}, 3000);
+                    });
+                    $("#error").html(data.errors.message);
                 }
 
            },
            error: function(err){
-
+               $(".alert").fadeIn(function(){
+                   setTimeout(function(){$(".alert").fadeOut();}, 3000);
+               });
+                $("#error").html(err.message);
            }
        });
 

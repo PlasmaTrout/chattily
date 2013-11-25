@@ -1,4 +1,23 @@
+body,html{
+    height:100%;
+}
 
+#view {
+    height:100%;
+    max-height:100%;
+    min-height:600px;
+}
+.row {
+    height:100%;
+    max-height:100%;
+    min-height:600px;
+}
+
+.panel{
+    height:100%;
+    max-height:100%;
+    min-height:600px;
+}
 
 
 .thumb {
@@ -7,9 +26,27 @@
     vertical-align:top;
     border:0px;
 }
-
+.info{
+    color:grey;
+    font-style:italic;
+}
 .hint {
     font-size:0.8em;
     color:grey;
     margin:2px;
+}
+.tell {
+    background:#fb9999;
+    color:white;
+}
+.tell a{
+    color:white;
+}
+.tell a:hover{
+    color:lightblue;
+}
+
+.emote {
+    font-style:italic;
+    color:grey;
 }

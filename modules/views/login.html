@@ -71,11 +71,11 @@
         <h2 class="form-signin-heading">Please sign in</h2>
         <input type="text" id="form-u" class="form-control" placeholder="LDAP User" required autofocus>
         <input type="password" id="form-p" class="form-control" placeholder="LDAP Password" required>
-        <label class="checkbox">
-            <input type="checkbox" value="remember-me"> Remember me
-        </label>
         <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
     </form>
+    <div class="alert alert-danger" style="display:none;">
+        <span class="label label-danger">Alert</span> <span id="error"></span>
+    </div>
 
 </div> <!-- /container -->
 
