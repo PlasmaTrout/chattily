@@ -15,22 +15,21 @@ jpackage("app.services", function(){
            div.addClass(data.type.replace('/',''));                                                    //escape html lt & gt symbols to prevent html text - see jbbcode in _process
            div.html(this._process(data.type, DateUtil.formatDate(date, "hh:nn:ss"), data.user,(data.message.replace(/</g, "&lt;").replace(/>/g, "&gt;"))));
            div.html(this._imgify(div));
+           if(data.user !== App.settings.user.name){
+               if(data.message.indexOf(App.settings.user.name) > 0){
+                 div.addClass("mention");
+               }
+           }
            container.append(div);
            container.parent().animate({ scrollTop: container.parent()[0].scrollHeight}, 100);
        };
 
        this._process = function(type, time, user, message){
-           var mention_start = "";
-           var mention_end = "";
+
            if(type === "emote"){
                return time + ": "+user+" "+message;
            }
-           if(user !== App.settings.user.name){
-               if(message.indexOf(App.settings.user.name) > 0){
-                   mention_start = "<span style=\"background:#5b0000\">"
-                   mention_end = "</span>";
-               }
-           }
+
            var result = JBBCODE.process({
                text: "[color=grey]"+time+"[/color]: [color=blue]"+user+"[/color] - "+message+"",
                removeMisalignedTags: false,
@@ -38,7 +37,7 @@ jpackage("app.services", function(){
            });
             var ret = this._linkify(result.html);
 
-           return (mention_start + ret + mention_end);
+           return ret;
        };
 
        this._linkify = function(message){

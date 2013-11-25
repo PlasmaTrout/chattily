@@ -19,6 +19,9 @@ body,html{
     min-height:600px;
 }
 
+.mention{
+    background:#d3d3d3;
+}
 
 .thumb {
     max-height:120px;

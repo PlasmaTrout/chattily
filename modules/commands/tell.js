@@ -19,6 +19,9 @@ exports.execute = function(context, callback){
 
     if(context.sockets) {
         ctx.setMessage(context.args);
+        //send a message to the sender (so his sent /tell shows up in chat)
+        context.sockets.in(context.user).emit("private_message",ctx);
+        //send a message to target (so it's only seen by him and the sender)
         context.sockets.in(username).emit("private_message",ctx);
         console.log("private message send to "+username);
     }
