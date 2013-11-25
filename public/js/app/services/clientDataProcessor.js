@@ -27,6 +27,13 @@ jpackage("app.services", function(){
            //container.parent().animate({ scrollTop: container.parent()[0].scrollHeight}, 100);
            //container.animate({ scrollTop: container.attr("scrollHeight") }, 3000);
            $("html, body").animate({ scrollTop: div.offset().top }, 100);
+
+           $.titleAlert("New Message", {
+               requireBlur:true,
+               stopOnFocus:true,
+               duration:30000,
+               interval:500
+           });
        };
 
        this._process = function(type, time, user, message){

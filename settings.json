@@ -1,9 +1,11 @@
 
 {
     "ldap": {
-        "url" : "ldaprr.bhntampa.com",
+        "url" : "corp.local",
         "port" : 389,
-        "org" : "o=bhntampa",
-        "uid" : "cn"
+        "org" : "DC=corp,DC=local",
+        "uid" : "sAMAccountName",
+        "adminUser": "atimldap",
+        "adminPass": "CFLkms11"
     }
 }

@@ -13,17 +13,19 @@ function auth() {
     this.port = settings.ldap.port;
     this.org = settings.ldap.org;
     this.uid = settings.ldap.uid;
-
+    this.admin = settings.ldap.adminUser;
+    this.adminPass = settings.ldap.adminPass;
 
 };
 
 auth.prototype.login = function(username, password, callback_fn) {
     this.ldauth = new LdapAuth({
         url: 'ldap://'+this.url+':'+this.port,
-        adminDn: '',
-        adminPassword: '',
+        adminDn: this.admin,
+        adminPassword: this.adminPass,
         searchBase: this.org,
-        searchFilter: '(cn={{username}})'
+        searchFilter: '('+this.uid+'={{username}})',
+        verbose: true
     });
     this.ldauth.authenticate(username, password, function(err, user){
         callback_fn(err, user);

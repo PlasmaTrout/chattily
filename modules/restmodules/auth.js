@@ -7,7 +7,7 @@ exports.authenticateUser = function(req,res) {
     var returnObj = { success: false };
 
 	var headers = req.headers;
-	console.log(headers);
+	//console.log(headers);
 	var auth = new ldauth();
 	var unencodedPass = new Buffer(headers.pass,'base64').toString('utf-8');
 

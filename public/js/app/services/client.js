@@ -20,6 +20,12 @@ jpackage("app.services", function(){
            div.html(message);
            container.append(div);
            $("html, body").animate({ scrollTop: div.offset().top }, 100);
+           $.titleAlert("Attention!", {
+               requireBlur:true,
+               stopOnFocus:true,
+               duration:30000,
+               interval:500
+           });
            //container.parent().animate({ scrollTop: container.parent()[0].scrollHeight}, 100);
        }
        this.connect = function(){
