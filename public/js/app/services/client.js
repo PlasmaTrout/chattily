@@ -19,7 +19,8 @@ jpackage("app.services", function(){
            div.addClass("info");
            div.html(message);
            container.append(div);
-           container.parent().animate({ scrollTop: container.parent()[0].scrollHeight}, 100);
+           $("html, body").animate({ scrollTop: div.offset().top }, 100);
+           //container.parent().animate({ scrollTop: container.parent()[0].scrollHeight}, 100);
        }
        this.connect = function(){
            var _this = this;

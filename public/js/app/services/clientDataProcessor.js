@@ -21,7 +21,12 @@ jpackage("app.services", function(){
                }
            }
            container.append(div);
-           container.parent().animate({ scrollTop: container.parent()[0].scrollHeight}, 100);
+           if(container.children().length > 50){
+             container.children("div:first").remove();
+           }
+           //container.parent().animate({ scrollTop: container.parent()[0].scrollHeight}, 100);
+           //container.animate({ scrollTop: container.attr("scrollHeight") }, 3000);
+           $("html, body").animate({ scrollTop: div.offset().top }, 100);
        };
 
        this._process = function(type, time, user, message){

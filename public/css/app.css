@@ -19,6 +19,15 @@ body,html{
     min-height:600px;
 }
 
+.footer{
+    position:fixed;
+    bottom:0px;
+    left:0px;
+    padding:10px;
+    background:#ffffff;
+
+}
+
 .mention{
     background:#d3d3d3;
 }
