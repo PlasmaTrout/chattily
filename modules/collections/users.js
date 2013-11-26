@@ -28,3 +28,14 @@ exports.getRoomsForUser = function(socketId){
         return item;
     });
 };
+
+exports.userExist = function(username){
+    var ret = false;
+    for(var u in GLOBAL._users){
+        if(GLOBAL._users[u] === username){
+            ret = true;
+        }
+    }
+    return ret;
+
+}

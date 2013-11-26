@@ -54,12 +54,12 @@ io.sockets.on('connection',function(socket){
     		var cmd = require('./modules/commands'+data.command.toLowerCase());
     		var context = {
 	    		sockets: io.sockets,
-          command: data.command,
-          user: data.user,
-          args: data.args,
-          channel: data.channel,
-          socket: socket,
-          timestamp: new Date().toJSON()
+                command: data.command,
+                user: data.user,
+                args: data.args,
+                channel: data.channel,
+                socket: socket,
+                timestamp: new Date().toJSON()
 	    	};
 
 	    	cmd.execute(context,function(data){

@@ -42,6 +42,12 @@ jpackage("app.services", function(){
            this.socket.on("info",function(clientObj){
                _this._info(clientObj);
            });
+           this.socket.on("joined",function(clientObj){
+               _this._info(clientObj.user+" has joined "+clientObj.channel);
+           });
+           this.socket.on("left",function(clientObj){
+               _this._info(clientObj.user+" has left "+clientObj.channel);
+           });
            this.socket.on("rejected",function(clientObj){
               window.location = "/logout";
            });
