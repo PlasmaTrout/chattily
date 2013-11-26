@@ -44,6 +44,7 @@ jpackage("app.ui", function() {
                 e.preventDefault();
                 _this._wrap($("#chatLine")[0], "u");
             });
+
             // var _this = this;
         },
         render: function() {

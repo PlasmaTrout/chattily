@@ -34,6 +34,15 @@ jpackage("app.ui", function() {
                url: '/rooms/global',
                success: function(data){
                    _this.data = data;
+                   $(".menuUsers").each(function(){
+                      $(this).remove();
+                   })
+                   for(var u in data.users){
+                       var uli = $("<li></li>");
+                       uli.addClass("menuUsers");
+                       uli.html(data.users[u].username);
+                       $("#menu ul").append(uli);
+                   }
                    _this.render();
                    setTimeout(_this.getUsers, 1000);
                }

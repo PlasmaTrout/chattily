@@ -33,6 +33,7 @@ if(user !== null){
     var signed_in_as = $("#signed_in_as");
     if(signed_in_as !== null){
         signed_in_as.text(App.settings.user.fullName);
+        $('#loggedInUser').text(App.settings.user.fullName);
     }
 }
 
