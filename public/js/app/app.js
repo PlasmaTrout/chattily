@@ -28,7 +28,7 @@ cookie_sec = function(action,str){
     return (action=='enc') ? encodeURIComponent(base64.encode(str)) : base64.decode(decodeURIComponent(str));
 };
 var user = CookieUtil.read("sec");
-if(user !== null){
+if(user && user !== null){
     App.settings.user = JSON.parse(user);
     var signed_in_as = $("#signed_in_as");
     if(signed_in_as !== null){
@@ -36,6 +36,13 @@ if(user !== null){
         $('#loggedInUser').text(App.settings.user.fullName);
     }
 }
+
+var DOC_HEIGHT = document.body.clientHeight;
+var DOC_WIDTH = document.body.clientWidth;
+$(window).on("resize",function(){
+    DOC_HEIGHT = document.body.clientHeight;
+    DOC_WIDTH = document.body.clientWidth;
+})
 
 
 

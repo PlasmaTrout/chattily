@@ -9,23 +9,22 @@ var settings = require('../../settings.json');
 var LdapAuth = require('ldapauth');
 
 function auth() {
-    this.url = settings.ldap.url;
-    this.port = settings.ldap.port;
-    this.org = settings.ldap.org;
-    this.uid = settings.ldap.uid;
-    this.admin = settings.ldap.adminUser;
-    this.adminPass = settings.ldap.adminPass;
+    this.url = settings.ldap2.url;
+    this.port = settings.ldap2.port;
+    this.org = settings.ldap2.org;
+    this.uid = settings.ldap2.uid;
+    this.admin = '';
+    this.adminPass = '';
 
 };
 
 auth.prototype.login = function(username, password, callback_fn) {
     this.ldauth = new LdapAuth({
         url: 'ldap://'+this.url+':'+this.port,
-        adminDn: this.admin,
-        adminPassword: this.adminPass,
+        adminDn: '',
+        adminPassword: '',
         searchBase: this.org,
-        searchFilter: '('+this.uid+'={{username}})',
-        verbose: true
+        searchFilter: '(cn={{username}})'
     });
     this.ldauth.authenticate(username, password, function(err, user){
         callback_fn(err, user);

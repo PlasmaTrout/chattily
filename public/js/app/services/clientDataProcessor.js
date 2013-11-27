@@ -26,7 +26,10 @@ jpackage("app.services", function(){
            }
            //container.parent().animate({ scrollTop: container.parent()[0].scrollHeight}, 100);
            //container.animate({ scrollTop: container.attr("scrollHeight") }, 3000);
-           $("html, body").animate({ scrollTop: div.offset().top }, 100);
+           if(div.offset().top+150 > DOC_HEIGHT){
+               $(".page").animate({ scrollTop: div.offset().top }, 100);
+           }
+
 
            $.titleAlert("New Message", {
                requireBlur:true,

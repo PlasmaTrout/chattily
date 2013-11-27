@@ -19,7 +19,10 @@ jpackage("app.services", function(){
            div.addClass("info");
            div.html(message);
            container.append(div);
-           $("html, body").animate({ scrollTop: div.offset().top }, 100);
+           if(div.offset().top+150 > DOC_HEIGHT){
+               $(".page").animate({ scrollTop: div.offset().top }, 100);
+           }
+
            $.titleAlert("Attention!", {
                requireBlur:true,
                stopOnFocus:true,

@@ -14,6 +14,7 @@ jpackage("app.ui", function() {
         initialize: function() {
             // console.log("initialize");
             _.bindAll(this);
+            $("#testResultPanel").css({"height":DOC_HEIGHT}).css({"width":DOC_WIDTH}).css({"overflow":"scroll"});
             var _this = this;
             this.client = new app.services.client();
             this.client.init();

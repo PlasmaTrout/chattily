@@ -10,7 +10,7 @@ var ldauth = require('./../modules/authentication/ldap');
 
 var auth = new ldauth();
 
-auth.login("password", "password", function(err, user){
+auth.login(process.argv[2], process.argv[3], function(err, user){
     if(err){console.log("Error: "+err);}
     if(user){console.log(user);}
     auth.close();
