@@ -6,7 +6,7 @@ exports.execute = function(context, callback){
 	
 	if(context.sockets) {
 		ctx.setMessage(context.args);
-		context.sockets.in(context.channel).emit("channel",ctx);
+		context.sockets.in(context.channel).emit("channel",ctx);		
     }
 
     callback();

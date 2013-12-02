@@ -7,6 +7,7 @@ var socket = require('socket.io');
 var cm = require('./modules/restmodules/channels');
 var rauth = require('./modules/restmodules/auth');
 var users = require('./modules/collections/users');
+var history = require('./modules/db/chathistory');
 var app = express();
 
 var emit = function(room,type,message) {
@@ -27,19 +28,23 @@ io.sockets.on('connection',function(socket){
 	
   //console.log(socket);
     socket.on('auth', function(data){
+
         if(!data.user || !data.pass){
-            socket.emit("rejected");
+            socket.emit("rejected due to missing credentials");
         }
+
         rauth.socketAuthentication(data.user, data.pass, function(ret){
-            if(ret.success && ret.user){
+            console.log("Authenticating socket: "+ ret);
+            if(ret.success && ret.user.uid){
+                console.log(ret.user.uid+" has successfully logged on!");
                 users.addUser(data.user, socket.id);
                 socket.set("username", data.user, function(){
-                    socket.set("email", ret.user.mail, function(){});
+                    socket.set("email", data.email, function(){});
                     socket.join('global');
                     socket.join(data.user);
                 });
             } else {
-                socket.emit("rejected");
+                socket.emit("rejected due auth failure");
             }
         });
 
@@ -63,7 +68,7 @@ io.sockets.on('connection',function(socket){
 	    	};
 
 	    	cmd.execute(context,function(data){
-	    		//console.log(data);
+	    		history.saveMessageNoCallback(context);
 	    	});
 
     	} catch(e) {
