@@ -2,6 +2,7 @@ var settings = require('../../settings.json');
 var ldauth = require('../../modules/authentication/ldap');
 var base64_utils = require('../../modules/utils/base64');
 var base64 = new base64_utils();
+
 exports.authenticateUser = function(req,res) {
 
     var returnObj = { success: false };

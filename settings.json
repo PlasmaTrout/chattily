@@ -7,5 +7,13 @@
         "uid" : "sAMAccountName",
         "adminUser": "atimldap",
         "adminPass": "CFLkms11"
+    },
+    "ldap2": {
+    	"url" : "ldaprr.bhntampa.com",
+        "port" : 389,
+        "org" : "o=bhntampa",
+        "uid" : "cn",
+        "adminUser": "atimldap",
+        "adminPass": "CFLkms11"
     }
 }
