@@ -6,6 +6,14 @@
         "org" : "DC=corp,DC=local",
         "uid" : "sAMAccountName",
         "adminUser": "atimldap",
-        "adminPass": "CFLkms11"
+        "adminPass": "CFLkms11",
+        "adminUser2": "OSDCollab",
+        "adminPass2": "nzBawtT4BU"
+    },
+    "ldap2": {
+        "url": "ldaprr.bhntampa.com",
+        "port": 389,
+        "org": "o=bhntampa",
+        "uid": "cn"
     }
 }
