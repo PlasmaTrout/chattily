@@ -15,5 +15,12 @@
         "port": 389,
         "org": "o=bhntampa",
         "uid": "cn"
+    },
+    "mongo": {
+        "server": "localhost",
+        "db": "brightchat",
+        "port":27017,
+        "user": "brightchat",
+        "pass": "brightchat"
     }
 }
