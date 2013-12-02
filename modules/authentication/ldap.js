@@ -9,6 +9,7 @@ var settings = require('../../settings.json');
 var LdapAuth = require('ldapauth');
 
 function auth() {
+    console.log(settings);
     this.url = settings.ldap2.url;
     this.port = settings.ldap2.port;
     this.org = settings.ldap2.org;
