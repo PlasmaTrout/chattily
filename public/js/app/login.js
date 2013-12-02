@@ -17,11 +17,12 @@ $(document).ready(function(){
            url:'/users/authenticate',
            method: 'post',
            success: function(data){
+                //alert(data.user.email);
                 if(data.success){
                     App.settings.user = {};
-                    App.settings.user.name = data.user.cn;
-                    App.settings.user.fullName = data.user.fullName;
-                    App.settings.user.email = data.user.mail;
+                    App.settings.user.name = data.user.uid;
+                    App.settings.user.fullName = data.user.name;
+                    App.settings.user.email = data.user.email;
                     App.settings.user.enc_pass = base64.encode(encodeURIComponent($("#form-p").val()));
                     CookieUtil.write("sec", JSON.stringify(App.settings.user), null, '/', null);
                     window.location = "/";

@@ -1,6 +1,7 @@
 var settings = require('../../settings.json');
 var ldauth = require('../../modules/authentication/ldap');
 var base64_utils = require('../../modules/utils/base64');
+var profile = require('../../modules/db/profiledb');
 var base64 = new base64_utils();
 
 exports.authenticateUser = function(req,res) {
@@ -18,11 +19,25 @@ exports.authenticateUser = function(req,res) {
     		console.log("Error: "+err);
     	}
     	if(user){
-            returnObj.success=true;
-    		returnObj.user=user;
+            
+            profile.upsertProfile(user,function(success){
+                if(success){
+                    profile.getProfile(user.uid,function(data){
+                        returnObj.success = true;
+                        returnObj.user = data;
+                        res.send(returnObj);
+                        auth.close();
+                });
+                }else{
+                    returnObj.success = false;
+                    returnObj.errors = { error: 'Could not save the users profile to the local mongo store, proceed at own risk' };
+                    res.send(returnObj);
+                    auth.close();
+                }
+            });
     	}
-        res.send(returnObj);
-    	auth.close();
+        
+    	
 	});
 };
 
@@ -36,10 +51,21 @@ exports.socketAuthentication = function(user, pass, fn){
             retObj.error = err;
         }
         if(user){
-            retObj.user = user;
-            retObj.success = true;
+            profile.upsertProfile(user,function(success){
+                if(success){
+                    profile.getProfile(user.uid,function(data){
+                        retObj.success = true;
+                        retObj.user = data;
+                        auth.close();
+                        fn(retObj);
+                    });
+                }else{
+                    retObj.success = false;
+                    retObj.errors = { error: 'Could not save the users profile to the local mongo store, proceed at own risk' };
+                    auth.close();
+                    fn(retObj);           
+                }
+            });
         }
-        auth.close();
-        fn(retObj);
     });
 }
