@@ -122,6 +122,15 @@ var JBBCODE = (function() {
                 return '</span>';
             }
         },
+        "gist": {
+          openTag: function(params, content){
+              return 'gist|'+content;
+          },
+          closeTag: function(params, content){
+              return '';
+          },
+          displayContent: false
+        },
         "i": {
             openTag: function(params,content) {
                 return '<span class="jbbcode-i">';

@@ -26,9 +26,7 @@ jpackage("app.services", function(){
            }
            //container.parent().animate({ scrollTop: container.parent()[0].scrollHeight}, 100);
            //container.animate({ scrollTop: container.attr("scrollHeight") }, 3000);
-           if(div.offset().top+150 > DOC_HEIGHT){
-               $(".page").animate({ scrollTop: div.offset().top }, 100);
-           }
+           this._scroll();
 
 
            $.titleAlert("New Message", {
@@ -39,6 +37,13 @@ jpackage("app.services", function(){
            });
        };
 
+       this._scroll = function(){
+           var div = $(el).children("div:last");
+           var scrollHeight = $('.page')[0].scrollHeight;
+           if(scrollHeight+150 > DOC_HEIGHT){
+               $(".page").animate({ scrollTop: scrollHeight }, 100);
+           }
+       }
        this._process = function(type, time, user, message){
 
            if(type === "emote"){
@@ -50,9 +55,18 @@ jpackage("app.services", function(){
                removeMisalignedTags: false,
                addInLineBreaks: false
            });
-            var ret = this._linkify(result.html);
 
+           var ret = result.html;
+           if(message.substr(0, 6)==='[gist]'){
+               var gist = ret.split(' - ')[1];
+               ret = ret.replace(gist, '');
+               ret += this._gist($(el), gist);
+           } else {
+               ret = this._linkify(result.html);
+           }
            return ret;
+
+
        };
 
        this._linkify = function(message){
@@ -94,6 +108,23 @@ jpackage("app.services", function(){
                }
 
            });
+       }
+
+       this._gist = function(div, message){
+           var _this = this;
+           var gist = message.replace(/[^0-9]+/g, '');
+           var new_message = '<div class="gist-'+gist+'"></div>';
+           $.ajax({
+               url: 'https://gist.github.com/'+gist+'.json',
+               async: false,
+               dataType: 'jsonp',
+               success: function(data){
+                   $('head').append('<link rel="stylesheet" href="https://gist.github.com/'+data.stylesheet+'">');
+                   $(div).children('div:last').append(data.div);
+                   _this._scroll();
+               }
+           });
+           return new_message;
        }
    };
 });
