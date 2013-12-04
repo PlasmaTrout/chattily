@@ -138,7 +138,10 @@ app.get('/', function(req, res){
 
 });
 
+var port = settings.port;
+if(process.argv[3]){
+    port = process.argv[3];
+}
+socketServer.listen(port);
 
-socketServer.listen(8080);
-
-console.log('Listening on port 8080, use http://localhost:8080/health to test.');
+console.log('Listening on port '+port+', use http://localhost:'+port+'/health to test.');

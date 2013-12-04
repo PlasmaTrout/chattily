@@ -147,3 +147,11 @@ body,html{
     font-style:italic;
     color:grey;
 }
+
+
+.alert-float {
+    display:none;
+    position:absolute;
+    float:left;
+    z-index:1000;
+}
