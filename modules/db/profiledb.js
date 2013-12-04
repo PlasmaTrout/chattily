@@ -42,7 +42,10 @@ exports.getRoomMembers = function(req,res) {
 
 	conn.db.collection('profiles',function(err,collection) {
 		collection.find({ rooms: room }).toArray(function(err,items){
-			res.send(items);
+			var members = {
+				users: items
+			};
+			res.send(members);
 		});
 	});
 }
