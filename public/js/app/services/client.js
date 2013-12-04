@@ -35,8 +35,7 @@ jpackage("app.services", function(){
        this.connect = function(){
            var _this = this;
            this.socket = io.connect();
-           this.socket.emit("auth", {"user":App.settings.user.name, "pass":App.settings.user.enc_pass});
-           setTimeout(function(){_this._info('<br/>Joined Channel!')}, 500);
+
            this.socket.on("channel",function(clientObj){
                _this._data(clientObj);
            });
@@ -56,13 +55,21 @@ jpackage("app.services", function(){
               window.location = "/logout";
            });
            this.socket.on("disconnect", function(clientObj){
-              var alert = $('#errorAlert');
-               alert.html("You have been disconnected, please <a href=\"/\">reload</a> the page!");
-               alert.css({top: DOC_HEIGHT/2, left:(DOC_WIDTH/2 - alert.width()/2)});
-               alert.fadeIn();
+               alert("You have been disconnected, please <a href=\"/\">reload</a> the page or wait to be reconnected!");
+           });
+           this.socket.on("connect", function(clientObj){
+               $("#errorAlert").hide();
+               _this.socket.emit("auth", {"user":App.settings.user.name, "pass":App.settings.user.enc_pass});
+               setTimeout(function(){_this._info('<br/>Joined Channel!')}, 500);
            });
        };
        this.send = function(command){
+           App.history.push(command);
+           if(App.history.length > 10){
+               App.history.reverse();
+               App.history.pop();
+               App.history.reverse();
+           }
            var cmdObj = {
                user: App.settings.user.name,
                channel: "global"

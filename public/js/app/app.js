@@ -11,6 +11,7 @@ if (!App) var App = {};
 App.settings = {
 };
 App.templates = {};
+App.history = [];
 
 function load_template(name, path){
     $.ajax({
@@ -34,6 +35,13 @@ function load_gist(gist){
             $('#gistModal').modal({backdrop:false, show:true});
         }
     });
+}
+
+function alert(message){
+    var alert = $('#errorAlert');
+    alert.html(message);
+    alert.css({top: (DOC_HEIGHT/2.5 - alert.height()/2), left:(DOC_WIDTH/2 - alert.width()/2)});
+    alert.fadeIn();
 }
 
 cookie_sec = function(action,str){
