@@ -23,8 +23,8 @@ jpackage("app.ui", function() {
             this.historyIndex = 0;
             $('input[type=text]').on('keyup', function(e) {
                 if(e.which == 38){
-                    if(_this.historyIndex >= App.history.length){
-                        _this.historyIndex = 1;
+                    if(_this.historyIndex > App.history.length){
+                        _this.historyIndex = App.history.length;
                     } else {
                         _this.historyIndex++;
                     }
