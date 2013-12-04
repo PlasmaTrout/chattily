@@ -39,7 +39,7 @@ function load_gist(gist){
 function alert(message){
     var alert = $('#errorAlert');
     alert.html(message);
-    alert.css({top: DOC_HEIGHT/2, left:(DOC_WIDTH/2 - alert.width()/2)});
+    alert.css({top: (DOC_HEIGHT/2.5 - alert.height()/2), left:(DOC_WIDTH/2 - alert.width()/2)});
     alert.fadeIn();
 }
 
