@@ -8,6 +8,7 @@ var cm = require('./modules/restmodules/channels');
 var rauth = require('./modules/restmodules/auth');
 var users = require('./modules/collections/users');
 var history = require('./modules/db/chathistory');
+var profile = require('./modules/db/profiledb');
 var app = express();
 
 var emit = function(room,type,message) {
@@ -25,8 +26,7 @@ var socketServer = http.createServer(app);
 var io = require('socket.io').listen(socketServer);
 
 io.sockets.on('connection',function(socket){
-	
-  //console.log(socket);
+
     socket.on('auth', function(data){
 
         if(!data.user || !data.pass){
@@ -34,10 +34,12 @@ io.sockets.on('connection',function(socket){
         }
 
         rauth.socketAuthentication(data.user, data.pass, function(ret){
-            console.log("Authenticating socket: "+ ret);
+            
             if(ret.success && ret.user.uid){
                 console.log(ret.user.uid+" has successfully logged on!");
                 users.addUser(data.user, socket.id);
+                profile.addMembershipToRoom("global",ret.user.uid);
+
                 socket.set("username", data.user, function(){
                     socket.set("email", data.email, function(){});
                     socket.join('global');
