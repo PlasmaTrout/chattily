@@ -2,7 +2,7 @@
     <h4>Users</h4>
     <div id="userPanel" style="vertical-align:top;">
     <% _.each(users, function(u){ %>
-        <span style="font-size:0.9em;"><%= u.username %></span><br/>
+        <span style="font-size:0.9em;"><%= u.uid %>@<%= u.location %></span><br/>
     <% }); %>
     </div>
 </div>

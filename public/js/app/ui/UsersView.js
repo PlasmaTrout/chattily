@@ -40,7 +40,7 @@ jpackage("app.ui", function() {
                    for(var u in data.users){
                        var uli = $("<li></li>");
                        uli.addClass("menuUsers");
-                       uli.html(data.users[u].username);
+                       uli.html(data.users[u].uid);
                        $("#menu ul").append(uli);
                    }
                    _this.render();

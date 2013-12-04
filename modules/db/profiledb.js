@@ -15,10 +15,56 @@ exports.upsertProfile = function(ldapProfile,callback) {
 		{
 			uid: ldapProfile.uid,
 			name: ldapProfile.fullName,
-			email: ldapProfile.mail
+			email: ldapProfile.mail,
+			location: "work"
 		},
 		{ upsert: true }, 
 		function(err,data) {
+			if(err) {
+				callback(false);
+			}else{
+				callback(true);
+			}
+		});
+	});
+}
+
+exports.addMembershipToRoom = function(room,uid) {
+	console.log("adding "+room+" to "+uid);
+	conn.db.collection('profiles',function(err,collection){
+		collection.update({ uid: uid },{ $addToSet: { rooms: room } },function(err,data){
+		});
+	});
+}
+
+exports.getRoomMembers = function(req,res) {
+	var room = req.params.room;
+
+	conn.db.collection('profiles',function(err,collection) {
+		collection.find({ rooms: room }).toArray(function(err,items){
+			var members = {
+				users: items
+			};
+			res.send(members);
+		});
+	});
+}
+
+exports.removeMembershipFromRoom = function(room,uuid) {
+	conn.db.collection('profiles',function(err,collection){
+		collection.update({ uid: uid },{ $pull: { rooms: room } },function(err,data){
+			if(err) {
+				callback(false);
+			}else{
+				callback(true);
+			}
+		});
+	});
+}
+
+exports.setLocation = function(location,uid,callback) {
+	conn.db.collection('profiles',function(err,collection){
+		collection.update({ uid: uid },{ $set: { location: location } },function(err,data){
 			if(err) {
 				callback(false);
 			}else{
