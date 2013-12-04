@@ -67,7 +67,7 @@ io.sockets.on('connection',function(socket){
 	socket.on('command', function (data) {
 		try {
         // Remember the command already has an / in it
-    		var cmd = require('../modules/commands'+data.command.toLowerCase());
+    		var cmd = require('./modules/commands'+data.command.toLowerCase());
     		var context = {
 	    		sockets: io.sockets,
                 command: data.command,
