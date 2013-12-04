@@ -23,7 +23,7 @@ jpackage("app.ui", function() {
             this.historyIndex = 0;
             $('input[type=text]').on('keyup', function(e) {
                 if(e.which == 38){
-                    if(_this.historyIndex > App.history.length){
+                    if(_this.historyIndex >= App.history.length){
                         _this.historyIndex = App.history.length;
                     } else {
                         _this.historyIndex++;
@@ -31,8 +31,8 @@ jpackage("app.ui", function() {
                     $("#chatLine").val(App.history[App.history.length-_this.historyIndex]);
                 }
                 if(e.which == 40){
-                    if(_this.historyIndex <= 1){
-                        _this.historyIndex = 1;
+                    if(_this.historyIndex <= 0){
+                        _this.historyIndex = 0;
                     } else {
                         _this.historyIndex--;
                     }

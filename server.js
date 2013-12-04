@@ -54,7 +54,7 @@ io.sockets.on('connection',function(socket){
     });
 
     socket.on('disconnect', function() {
-        io.sockets.in("global").emit("channel",socket.id+" disconnected!");
+        io.sockets.in("global").emit("info",socket.id+" disconnected!");
         socket.get("username",function(err,data){
             profile.removeMembershipsForUser(data);
         });
