@@ -55,7 +55,10 @@ io.sockets.on('connection',function(socket){
 
     socket.on('disconnect', function() {
         io.sockets.in("global").emit("channel",socket.id+" disconnected!");
-        delete clients[socket.id];
+        socket.get("username",function(err,data){
+            profile.removeMembershipsForUser(data);
+        });
+        delete io.sockets[socket.id];
     });
 
 
@@ -71,7 +74,7 @@ io.sockets.on('connection',function(socket){
                 user: data.user,
                 args: data.args,
                 channel: data.channel,
-                socket: socket,
+                socket: socket, 
                 timestamp: new Date().toJSON()
 	    	};
 
@@ -108,6 +111,10 @@ app.get("/rooms/:room", function(req,res){
   profile.getRoomMembers(req,res);
 });
 
+app.get("/locations/:year/:month/:day",function(req,res){
+    profile.getLocationReport(req,res);
+});
+
 app.post("/users/authenticate",rauth.authenticateUser);
 
 app.get('/health', function(req, res){
@@ -142,6 +149,9 @@ var port = settings.port;
 if(process.argv[2]){
     port = process.argv[2];
 }
+
+// Clears out all db data rooms before the server starts
+profile.clearAllMemberships();
 socketServer.listen(port);
 
 console.log('Listening on port '+port+', use http://localhost:'+port+'/health to test.');
