@@ -115,6 +115,10 @@ app.get("/rooms/:channel/:limit",function(req,res){
     history.getLastMessages(req,res);
 });
 
+app.get("/rooms/:channel/:uid/:limit",function(req,res){
+    history.getLastMessages(req,res);
+});
+
 app.get("/locations/:year/:month/:day",function(req,res){
     profile.getLocationReport(req,res);
 });

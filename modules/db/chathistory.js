@@ -25,9 +25,14 @@ exports.saveMessageNoCallback = function(context){
 exports.getLastMessages = function(req,res) {
 	var channel = req.params.channel;
 	var limit = parseInt(req.params.limit);
+    var query = { command: '/say' };
+
+	if(req.params.uid){
+		query = { command: '/say',uid: req.params.uid };
+	}
 
 	conn.db.collection(channel,function(err,collection) {
-		collection.find({}).sort({time: 1}).limit(limit).toArray(function(err,collection){
+		collection.find(query).sort({time: 1}).limit(limit).toArray(function(err,collection){
 			res.send(collection);
 		});
 	});
