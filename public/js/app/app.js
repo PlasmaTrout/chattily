@@ -11,6 +11,7 @@ if (!App) var App = {};
 App.settings = {
 };
 App.templates = {};
+App.history = [];
 
 function load_template(name, path){
     $.ajax({

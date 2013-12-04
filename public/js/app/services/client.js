@@ -64,6 +64,12 @@ jpackage("app.services", function(){
            });
        };
        this.send = function(command){
+           App.history.push(command);
+           if(App.history.length > 10){
+               App.history.reverse();
+               App.history.pop();
+               App.history.reverse();
+           }
            var cmdObj = {
                user: App.settings.user.name,
                channel: "global"
