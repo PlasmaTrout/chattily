@@ -21,3 +21,14 @@ exports.saveMessageNoCallback = function(context){
 		});
 	});
 };
+
+exports.getLastMessages = function(req,res) {
+	var channel = req.params.channel;
+	var limit = parseInt(req.params.limit);
+
+	conn.db.collection(channel,function(err,collection) {
+		collection.find({}).sort({time: 1}).limit(limit).toArray(function(err,collection){
+			res.send(collection);
+		});
+	});
+}

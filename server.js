@@ -67,7 +67,7 @@ io.sockets.on('connection',function(socket){
 	socket.on('command', function (data) {
 		try {
         // Remember the command already has an / in it
-    		var cmd = require('./modules/commands'+data.command.toLowerCase());
+    		var cmd = require('../modules/commands'+data.command.toLowerCase());
     		var context = {
 	    		sockets: io.sockets,
                 command: data.command,
@@ -109,6 +109,10 @@ app.get('/rooms/list', function(req,res){
 
 app.get("/rooms/:room", function(req,res){
   profile.getRoomMembers(req,res);
+});
+
+app.get("/rooms/:channel/:limit",function(req,res){
+    history.getLastMessages(req,res);
 });
 
 app.get("/locations/:year/:month/:day",function(req,res){
