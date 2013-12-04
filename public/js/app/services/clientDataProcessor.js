@@ -117,7 +117,7 @@ jpackage("app.services", function(){
            if(DOC_WIDTH>767){
                new_message = '<a href="javascript:load_gist(\''+gist+'\');">https://gist.github.com/'+gist+'</a>';
            }else {
-               new_message = '<a href="https://gist.github.com/'+gist+'">https://gist.github.com/'+gist+'</a>';
+               new_message = '<a target="_new" href="https://gist.github.com/'+gist+'">https://gist.github.com/'+gist+'</a>';
            }
 
            return new_message;
