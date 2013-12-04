@@ -55,6 +55,12 @@ jpackage("app.services", function(){
            this.socket.on("rejected",function(clientObj){
               window.location = "/logout";
            });
+           this.socket.on("disconnect", function(clientObj){
+              var alert = $('#errorAlert');
+               alert.html("You have been disconnected, please <a href=\"/\">reload</a> the page!");
+               alert.css({top: DOC_HEIGHT/2, left:(DOC_WIDTH/2 - alert.width()/2)});
+               alert.fadeIn();
+           });
        };
        this.send = function(command){
            var cmdObj = {
