@@ -36,6 +36,13 @@ function load_gist(gist){
     });
 }
 
+function alert(message){
+    var alert = $('#errorAlert');
+    alert.html(message);
+    alert.css({top: DOC_HEIGHT/2, left:(DOC_WIDTH/2 - alert.width()/2)});
+    alert.fadeIn();
+}
+
 cookie_sec = function(action,str){
     var action = action || 'enc';
     return (action=='enc') ? encodeURIComponent(base64.encode(str)) : base64.decode(decodeURIComponent(str));
