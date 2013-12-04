@@ -1,5 +1,6 @@
 
 {
+    "port":8080,
     "ldap": {
         "url" : "corp.local",
         "port" : 389,
