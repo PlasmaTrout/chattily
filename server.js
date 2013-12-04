@@ -133,8 +133,8 @@ app.get('/', function(req, res){
 });
 
 var port = settings.port;
-if(process.argv[3]){
-    port = process.argv[3];
+if(process.argv[2]){
+    port = process.argv[2];
 }
 socketServer.listen(port);
 
