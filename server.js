@@ -99,7 +99,7 @@ app.get('/rooms/list', function(req,res){
 });
 
 app.get("/rooms/:room", function(req,res){
-  cm.getSocketsInRoom(req,res,io.sockets);
+  profile.getRoomMembers(req,res);
 });
 
 app.post("/users/authenticate",rauth.authenticateUser);

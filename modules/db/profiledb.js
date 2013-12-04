@@ -37,9 +37,11 @@ exports.addMembershipToRoom = function(room,uid) {
 	});
 }
 
-exports.getRoomMembers = function(res,res) {
+exports.getRoomMembers = function(req,res) {
+	var room = req.params.room;
+
 	conn.db.collection('profiles',function(err,collection) {
-		collection.find({ rooms: uid },function(err,items){
+		collection.find({ rooms: room }).toArray(function(err,items){
 			res.send(items);
 		});
 	});
