@@ -40,7 +40,7 @@ jpackage("app.services", function(){
        this._scroll = function(){
            var div = $(el).children("div:last");
            var scrollHeight = $('.page')[0].scrollHeight;
-           if(scrollHeight+150 > DOC_HEIGHT){
+           if(scrollHeight > DOC_HEIGHT){
                $(".page").animate({ scrollTop: scrollHeight }, 100);
            }
        }
@@ -112,18 +112,14 @@ jpackage("app.services", function(){
 
        this._gist = function(div, message){
            var _this = this;
-           var gist = message.replace(/[^0-9]+/g, '');
-           var new_message = '<div class="gist-'+gist+'"></div>';
-           $.ajax({
-               url: 'https://gist.github.com/'+gist+'.json',
-               async: false,
-               dataType: 'jsonp',
-               success: function(data){
-                   $('head').append('<link rel="stylesheet" href="https://gist.github.com/'+data.stylesheet+'">');
-                   $(div).children('div:last').append(data.div);
-                   _this._scroll();
-               }
-           });
+           var gist = message.replace('gist|', '').replace(/[^0-9A-Za-z]+/g, '');
+           var new_message;
+           if(DOC_WIDTH>767){
+               new_message = '<a href="javascript:load_gist(\''+gist+'\');">https://gist.github.com/'+gist+'</a>';
+           }else {
+               new_message = '<a href="https://gist.github.com/'+gist+'">https://gist.github.com/'+gist+'</a>';
+           }
+
            return new_message;
        }
    };

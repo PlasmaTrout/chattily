@@ -22,6 +22,19 @@ function load_template(name, path){
     })
 }
 
+function load_gist(gist){
+    $.ajax({
+        url: 'https://gist.github.com/'+gist+'.json',
+        async: false,
+        dataType: 'jsonp',
+        success: function(data){
+            $('head').append('<link rel="stylesheet" href="https://gist.github.com/'+data.stylesheet+'">');
+            $('#gistModalBody').html(data.div);
+            $('#gistModalLabel').text(data.description);
+            $('#gistModal').modal({backdrop:false, show:true});
+        }
+    });
+}
 
 cookie_sec = function(action,str){
     var action = action || 'enc';
