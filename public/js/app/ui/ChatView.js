@@ -30,6 +30,14 @@ jpackage("app.ui", function() {
                     }
                     $("#chatLine").val(App.history[App.history.length-_this.historyIndex]);
                 }
+                if(e.which == 40){
+                    if(_this.historyIndex <= 1){
+                        _this.historyIndex = 1;
+                    } else {
+                        _this.historyIndex--;
+                    }
+                    $("#chatLine").val(App.history[App.history.length-_this.historyIndex]);
+                }
                 if (e.which == 13) {
                     e.preventDefault();
                     _this._send();
