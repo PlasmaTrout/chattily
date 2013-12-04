@@ -53,6 +53,11 @@ io.sockets.on('connection',function(socket){
 
     });
 
+    socket.on('disconnect', function() {
+        io.sockets.in("global").emit("channel",socket.id+" disconnected!");
+        delete clients[socket.id];
+    });
+
 
 	// On a command, lookup the appropriate module and call execute on it. The
 	// arguments for execute should always be the same.
@@ -81,13 +86,14 @@ io.sockets.on('connection',function(socket){
 
     
   	});
+
     socket.on('join', function(data){
         socket.join(data.room);
-        socket.broadcast.to(data.room).emit("joined", socket.store.data.nickname);
+        socket.broadcast.in(data.room).emit("joined", socket.store.data.nickname);
     });
     socket.on('leave', function(data){
         socket.leave(data.room);
-        socket.broadcast.to(data.room).emit("left", socket.store.data.nickname);
+        socket.broadcast.in(data.room).emit("left", socket.store.data.nickname);
     });
 });
 
