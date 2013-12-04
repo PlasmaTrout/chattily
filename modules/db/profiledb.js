@@ -16,7 +16,8 @@ exports.upsertProfile = function(ldapProfile,callback) {
 			uid: ldapProfile.uid,
 			name: ldapProfile.fullName,
 			email: ldapProfile.mail,
-			location: "work"
+			location: "work",
+			locationUpdated: new Date()
 		},
 		{ upsert: true }, 
 		function(err,data) {
@@ -50,7 +51,24 @@ exports.getRoomMembers = function(req,res) {
 	});
 }
 
-exports.removeMembershipFromRoom = function(room,uuid) {
+exports.getLocationReport = function(req,res) {
+	var year = req.params.year;
+	var month = req.params.month;
+	var day = req.params.day;
+	var search = new Date(year, day, month);
+
+	conn.db.collection('profiles',function(err,collection) {
+		collection.find({ locationUpdated: { $gte: search } }).toArray(function(err,items){
+			var members = {
+				start: search,
+				users: items
+			};
+			res.send(members);
+		});
+	});
+}
+
+exports.removeMembershipFromRoom = function(room,uid) {
 	conn.db.collection('profiles',function(err,collection){
 		collection.update({ uid: uid },{ $pull: { rooms: room } },function(err,data){
 			if(err) {
@@ -61,6 +79,25 @@ exports.removeMembershipFromRoom = function(room,uuid) {
 		});
 	});
 }
+
+exports.clearAllMemberships = function() {
+	console.log("clearing out all memberships");
+	conn.db.collection('profiles',function(err,collection){
+		collection.update({ },{ $set: { rooms: [] } },function(err,data){
+			
+		});
+	});
+}
+
+exports.removeMembershipsForUser = function(uid) {
+	console.log("clearing out "+uid+"'s memberships");
+	conn.db.collection('profiles',function(err,collection){
+		collection.update({ uid: uid },{ $set: { rooms: [] } },function(err,data){
+			
+		});
+	});
+}
+
 
 exports.setLocation = function(location,uid,callback) {
 	conn.db.collection('profiles',function(err,collection){
