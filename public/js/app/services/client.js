@@ -19,8 +19,9 @@ jpackage("app.services", function(){
            div.addClass("info");
            div.html(message);
            container.append(div);
-           if(div.offset().top+150 > DOC_HEIGHT){
-               $(".page").animate({ scrollTop: div.offset().top }, 100);
+           var scrollHeight = $('.page')[0].scrollHeight;
+           if(scrollHeight > DOC_HEIGHT){
+               $(".page").animate({ scrollTop: scrollHeight }, 100);
            }
 
            $.titleAlert("Attention!", {

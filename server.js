@@ -1,3 +1,4 @@
+
 var settings = require('./settings.json');
 var express = require('express');
 var socket = require('socket.io');
@@ -75,7 +76,7 @@ io.sockets.on('connection',function(socket){
 
     	} catch(e) {
     		console.log("Command not found: "+e);
-    		emit("global","info","Command not found");
+    		socket.emit("global","info","Command not found");
     	}
 
     
