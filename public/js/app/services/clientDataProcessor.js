@@ -24,9 +24,12 @@ jpackage("app.services", function(){
            $(div.children()).each(function(i, elm){
                var attr = $(elm).attr("href");
                if(attr){
-                   if(attr.slice(0,15) == "http://youtu.be"){
-                       $(elm).attr("href", "javascript:load_youtube('"+attr.replace(attr.slice(0,16), '')+"');");
+                   var regExp = /.*(?:youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=)([^#\&\?]*).*/;
+                   var match = attr.match(regExp);
+                   if (match&&match[1].length==11){
+                       $(elm).attr("href", "javascript:load_youtube('"+match[1]+"');");
                    }
+
                }
            });
            if(container.children().length > 50){
