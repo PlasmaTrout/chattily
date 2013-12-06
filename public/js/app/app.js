@@ -16,7 +16,7 @@ App.history = [];
 App.localstorage = window.localStorage;
 var history = App.localstorage.getItem("history");
 if(history){
-    App.history = history;
+    App.history = JSON.parse(history);
 }
 function load_template(name, path){
     $.ajax({
