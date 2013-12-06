@@ -65,6 +65,7 @@ jpackage("app.services", function(){
        };
        this.send = function(command){
            App.history.push(command);
+           App.localstorage.setItem("history", App.history);
            if(App.history.length > 10){
                App.history.reverse();
                App.history.pop();

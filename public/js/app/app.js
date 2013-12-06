@@ -13,6 +13,11 @@ App.settings = {
 App.templates = {};
 App.history = [];
 
+App.localstorage = window.localStorage;
+var history = App.localstorage.getItem("history");
+if(history){
+    App.history = history;
+}
 function load_template(name, path){
     $.ajax({
         url: path,
