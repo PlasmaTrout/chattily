@@ -13,7 +13,7 @@ jpackage("app.services", function(){
            var div = $('<div></div>');
            var container = $(el);
            div.addClass(data.type.replace('/',''));                                                    //escape html lt & gt symbols to prevent html text - see jbbcode in _process
-           div.html(this._process(data.type, DateUtil.formatDate(date, "hh:nn:ss"), data.user,(data.message.replace(/</g, "&lt;").replace(/>/g, "&gt;"))));
+           div.html(this._process(data.type, DateUtil.formatDate(date, "h:nn:ss"), data.user,(data.message.replace(/</g, "&lt;").replace(/>/g, "&gt;"))));
            div.html(this._imgify(div));
            if(data.user !== App.settings.user.name){
                if(data.message.indexOf(App.settings.user.name) > 0){
@@ -21,6 +21,14 @@ jpackage("app.services", function(){
                }
            }
            container.append(div);
+           $(div.children()).each(function(i, elm){
+               var attr = $(elm).attr("href");
+               if(attr){
+                   if(attr.slice(0,15) == "http://youtu.be"){
+                       $(elm).attr("href", "javascript:load_youtube('"+attr.replace(attr.slice(0,16), '')+"');");
+                   }
+               }
+           });
            if(container.children().length > 50){
              container.children("div:first").remove();
            }
@@ -90,6 +98,7 @@ jpackage("app.services", function(){
            //Change email addresses to mailto:: links.
            replacePattern3 = /(([a-zA-Z0-9\-\_\.])+@[a-zA-Z\_]+?(\.[a-zA-Z]{2,6})+)/gim;
            replacedText = replacedText.replace(replacePattern3, '<a href="mailto:$1">$1</a>');
+
 
            return replacedText;
 
