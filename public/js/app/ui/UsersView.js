@@ -21,7 +21,7 @@ jpackage("app.ui", function() {
         initialize: function() {
             // console.log("initialize");
             _.bindAll(this);
-            this.getUsers();
+            setInterval(this.getUsers, 1000);
 
             // var _this = this;
         },
@@ -44,7 +44,6 @@ jpackage("app.ui", function() {
                        $("#menu ul").append(uli);
                    }
                    _this.render();
-                   setTimeout(_this.getUsers, 1000);
                }
             });
         }
