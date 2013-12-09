@@ -67,7 +67,7 @@ jpackage("app.services", function(){
        this._process = function(type, time, user, message){
 
            if(type === "emote"){
-               return time + ": "+user+" "+message;
+               return time + ": "+user.substr(2, user.length)+" "+message;
            }
 
            var result = JBBCODE.process({
