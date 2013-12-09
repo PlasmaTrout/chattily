@@ -13,7 +13,7 @@ jpackage("app.services", function(){
            var div = $('<div></div>');
            var container = $(el);
            div.addClass(data.type.replace('/',''));                                                    //escape html lt & gt symbols to prevent html text - see jbbcode in _process
-           div.html(this._process(data.type, DateUtil.formatDate(date, "h:nn:ss"), data.user,(data.message.replace(/</g, "&lt;").replace(/>/g, "&gt;"))));
+           div.html(this._process(data.type, DateUtil.formatDate(date, "h:nn:ss"), 'u|'+data.user,(data.message.replace(/</g, "&lt;").replace(/>/g, "&gt;"))));
            div.html(this._imgify(div));
            if(data.user !== App.settings.user.name){
                if(data.message.indexOf(App.settings.user.name) > 0){
@@ -31,6 +31,15 @@ jpackage("app.services", function(){
                    }
 
                }
+               if($(elm).html().substr(0, 2) == 'u|'){
+                   var user_say = $(elm);
+                   var user = user_say.html().substr(2, user_say.html().length);
+                   var tell_link = $("<a></a>");
+                   tell_link.attr("href", "javascript:prepare_tell('"+user+"');");
+                   tell_link.html(user);
+                   $(elm).html(tell_link);
+               }
+
            });
            if(container.children().length > 50){
              container.children("div:first").remove();

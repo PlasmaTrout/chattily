@@ -34,6 +34,12 @@ function load_template(name, path){
     })
 }
 
+function prepare_tell(username){
+    $("#chatLine").val('/tell '+username+' <message>');
+    $("#chatLine")[0].selectionStart = $("#chatLine").val().length - 9;
+    $("#chatLine")[0].selectionEnd = $("#chatLine").val().length;
+}
+
 function load_gist(gist){
     $.ajax({
         url: 'https://gist.github.com/'+gist+'.json',
