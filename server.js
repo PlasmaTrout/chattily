@@ -44,7 +44,7 @@ io.sockets.on('connection',function(socket){
                 socket.set("username", data.user, function(){
                     socket.set("email", data.email, function(){});
                     socket.join('global');
-                    io.sockets.in("global").emit("info",data+" connected!");
+                    io.sockets.in("global").emit("info",data.user+" connected!");
                     socket.join(data.user);
                 });
             } else {
