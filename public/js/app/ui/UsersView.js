@@ -34,6 +34,15 @@ jpackage("app.ui", function() {
                url: '/rooms/global',
                success: function(data){
                    _this.data = data;
+                   _this.data.users.sort(function(a,b){
+                       if(a.uid < b.uid){
+                           return -1;
+                       } else if(a.uid > b.uid){
+                           return 1;
+                       } else {
+                           return 0;
+                       }
+                   });
                    $(".menuUsers").each(function(){
                       $(this).remove();
                    })

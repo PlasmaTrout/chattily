@@ -1,9 +1,9 @@
-<div class="pull-right" id="usersView" style="border-left:2px solid #d3d3d3; position:fixed; top:50px; right:0px; width:200px; height: 95%; padding-left:10px; min-height:90%; max-height:95%; background:#ffffff; overflow:scroll">
-    <h4>Users</h4>
+<div class="pull-right" id="usersView" style="border-left:2px solid #d3d3d3; position:fixed; padding:0px 5px 40px 5px; margin:0px; top:50px; right:0px; width:200px; height: 95%; min-height:90%; max-height:95%; background:#ffffff; overflow:scroll">
+    <h4>Users: <%= users.length %></h4>
     <div id="userPanel" style="vertical-align:top;">
     <% _.each(users, function(u){ %>
 
-        <div style="font-size:0.9em; cursor:pointer; border-bottom:1px solid #cccccc; padding:3px;" class="user" data-user="<%= u.uid %>"><img style="width:30px;" src="http://www.gravatar.com/avatar/<%= md5(u.email.toString().toLowerCase()) %>"/> <%= u.uid %> @ <%= u.location %></div><br/>
-    <%  }); %>
+        <div style="font-size:0.9em; cursor:pointer; padding:5px 0px 5px 0px;" class="user-list-item" data-user="<%= u.uid %>"><img style="width:30px;" src="http://www.gravatar.com/avatar/<%= md5(u.email.toString().toLowerCase()) %>"/> <%= u.uid %> @ <%= u.location %></div>
+    <%   }); %>
     </div>
 </div>
