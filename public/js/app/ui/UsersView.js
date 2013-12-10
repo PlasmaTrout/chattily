@@ -43,7 +43,11 @@ jpackage("app.ui", function() {
                        uli.html(data.users[u].uid);
                        $("#menu ul").append(uli);
                    }
+                   var scrollTop = $("#usersView").scrollTop();
                    _this.render();
+                   $("#usersView").scrollTop(scrollTop);
+
+
                }
             });
         }

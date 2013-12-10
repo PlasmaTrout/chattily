@@ -14,7 +14,6 @@ jpackage("app.ui", function() {
         initialize: function() {
             // console.log("initialize");
             _.bindAll(this);
-            $("#testResultPanel").css({"height":DOC_HEIGHT}).css({"width":DOC_WIDTH}).css({"overflow":"scroll"});
             var _this = this;
             this.client = new app.services.client();
             this.client.init();
@@ -67,6 +66,9 @@ jpackage("app.ui", function() {
         },
         render: function() {
             this.$el.html(this.template(this.data));
+            var footer_height = $(".footer").height();
+            $("#ChatView").css({height:DOC_HEIGHT-footer_height}).css({width:DOC_WIDTH-200}).css({overflow:"scroll"});
+            $(".footer").css({width:DOC_WIDTH-200});
         },
         _send: function(){
             var _this = this;

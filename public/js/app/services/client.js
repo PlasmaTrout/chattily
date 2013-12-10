@@ -7,7 +7,7 @@
  */
 jpackage("app.services", function(){
    this.client = function(){
-       this._dataProcessor = new app.services.clientDataProcessor('#testResultPanel');
+       this._dataProcessor = new app.services.clientDataProcessor('#ChatView');
        this.init = function() {
        };
        this._data = function(data){
@@ -15,7 +15,7 @@ jpackage("app.services", function(){
        };
        this._info = function(message){
            var div = $('<div></div>');
-           var container = $('#testResultPanel');
+           var container = $('#ChatView');
            div.addClass("info");
            div.html(message);
            container.append(div);

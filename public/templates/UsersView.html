@@ -1,8 +1,9 @@
-<div class="pull-right" style="border-left:2px solid #d3d3d3; position:fixed; top:50px; right:0px; width:200px; height: 90%; padding-left:10px; min-height:90%; max-height:90%; background:#ffffff; overflow:scroll">
+<div class="pull-right" id="usersView" style="border-left:2px solid #d3d3d3; position:fixed; top:50px; right:0px; width:200px; height: 95%; padding-left:10px; min-height:90%; max-height:95%; background:#ffffff; overflow:scroll">
     <h4>Users</h4>
     <div id="userPanel" style="vertical-align:top;">
     <% _.each(users, function(u){ %>
-        <span style="font-size:0.9em;"><%= u.uid %>@<%= u.location %></span><br/>
-    <% }); %>
+
+        <div style="font-size:0.9em; cursor:pointer; border-bottom:1px solid #cccccc; padding:3px;" class="user" data-user="<%= u.uid %>"><img style="width:30px;" src="http://www.gravatar.com/avatar/<%= md5(u.email.toString().toLowerCase()) %>"/> <%= u.uid %> @ <%= u.location %></div><br/>
+    <%  }); %>
     </div>
 </div>

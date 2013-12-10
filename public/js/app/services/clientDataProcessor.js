@@ -48,7 +48,6 @@ jpackage("app.services", function(){
            //container.animate({ scrollTop: container.attr("scrollHeight") }, 3000);
            this._scroll();
 
-
            $.titleAlert("New Message", {
                requireBlur:true,
                stopOnFocus:true,
@@ -59,9 +58,10 @@ jpackage("app.services", function(){
 
        this._scroll = function(){
            var div = $(el).children("div:last");
-           var scrollHeight = $('.page')[0].scrollHeight;
+           var scrollHeight = $('#ChatView')[0].scrollHeight;
            if(scrollHeight > DOC_HEIGHT){
-               $(".page").animate({ scrollTop: scrollHeight }, 100);
+               $("#ChatView").animate({ scrollTop: scrollHeight }, 100);
+               $(".footer").animate({bottom: 0}, 100);
            }
        }
        this._process = function(type, time, user, message){
