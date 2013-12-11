@@ -10,6 +10,7 @@ var rauth = require('./modules/restmodules/auth');
 var users = require('./modules/collections/users');
 var history = require('./modules/db/chathistory');
 var profile = require('./modules/db/profiledb');
+var exec = require('child_process').exec;
 var app = express();
 
 var emit = function(room,type,message) {
@@ -18,6 +19,14 @@ var emit = function(room,type,message) {
             io.sockets.in(to).emit(type,message);
         }   
 }; 
+
+//Get the current git revision number used for forcing clients to reload if different.
+var commit_command = 'git rev-parse HEAD';
+exec(commit_command, function(error, stdout, stderr){
+    console.log("revision is: "+stdout);
+    settings.revision = stdout;
+});
+
 
 app.use(express.cookieParser());
 app.use(express.bodyParser());
@@ -152,6 +161,11 @@ app.get('/', function(req, res){
         }
     }
 
+});
+
+app.get('/revision', function(req, res){
+    console.log(settings.revision);
+   res.end(settings.revision);
 });
 
 var port = settings.port;
