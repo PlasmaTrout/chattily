@@ -16,50 +16,28 @@ jpackage("app.ui", function() {
 
     this.UsersView = Backbone.View.extend({
         template: _.template( App.templates.UsersViewTemplate ),
-        data: {},
 
         initialize: function() {
             // console.log("initialize");
+            this.collection = new app.collections.UserCollection();
+            this.collection.fetch();
+            var _this = this;
+            this.collection.on("add", function(model){
+                //console.log(model);
+                _this.render();
+            });
+
             _.bindAll(this);
-            setInterval(this.getUsers, 1000);
 
             // var _this = this;
         },
         render: function() {
-            this.$el.html(this.template(this.data));
+            this.$el.html(this.template( {users: this.collection.models} ));
         },
-        getUsers: function(){
-            var _this = this;
-            $.ajax({
-               url: '/rooms/global',
-               success: function(data){
-                   _this.data = data;
-                   _this.data.users.sort(function(a,b){
-                       if(a.uid < b.uid){
-                           return -1;
-                       } else if(a.uid > b.uid){
-                           return 1;
-                       } else {
-                           return 0;
-                       }
-                   });
-                   $(".menuUsers").each(function(){
-                      $(this).remove();
-                   })
-                   for(var u in data.users){
-                       var uli = $("<li></li>");
-                       uli.addClass("menuUsers");
-                       uli.html(data.users[u].uid);
-                       $("#menu ul").append(uli);
-                   }
-                   var scrollTop = $("#usersView").scrollTop();
-                   _this.render();
-                   $("#usersView").scrollTop(scrollTop);
-
-
-               }
-            });
+        update: function(){
+            this.collection.fetch({add:true});
         }
+        
 
     });
 });

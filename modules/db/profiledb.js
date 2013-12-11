@@ -46,7 +46,7 @@ exports.getRoomMembers = function(req,res) {
 			var members = {
 				users: items
 			};
-			res.send(members);
+			res.send(items);
 		});
 	});
 }

@@ -10,7 +10,7 @@ exports.execute = function(context, callback){
 			if(context.sockets){
 			 	ctx.setMessage("set his location to "+context.args.join(' '));
 				ctx.type="emote";
-				context.sockets.in(context.channel).emit("channel",ctx);
+				context.sockets.in(context.channel).emit("info",ctx.user + " "+ctx.message);
     		}
 		}
 	});

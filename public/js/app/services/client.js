@@ -44,6 +44,7 @@ jpackage("app.services", function(){
            });
            this.socket.on("info",function(clientObj){
                _this._info(clientObj);
+               App.usersView.update();
            });
            this.socket.on("joined",function(clientObj){
                _this._info(clientObj.user+" has joined "+clientObj.channel);
