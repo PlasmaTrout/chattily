@@ -50,15 +50,21 @@ function load_gist(gist){
             $('#gistModalBody').html(data.div);
             $('#gistModalLabel').text(data.description);
             $('#gistModal').modal({backdrop:false, show:true});
+            $('#gistModal').on('hidden.bs.modal', function(e){
+                $('#gistModalBody').html('');
+            });
         }
     });
 }
 
 function load_youtube(video){
 
-            $('#gistModalBody').html('<iframe width="538" height="315" src="http://www.youtube.com/embed/'+video+'?rel=0" frameborder="0" allowfullscreen></iframe>');
-            $('#gistModalLabel').text("Youtube");
-            $('#gistModal').modal({backdrop:false, show:true});
+    $('#gistModalBody').html('<iframe width="538" height="315" src="http://www.youtube.com/embed/'+video+'?rel=0" frameborder="0" allowfullscreen></iframe>');
+    $('#gistModalLabel').text("Youtube");
+    $('#gistModal').modal({backdrop:false, show:true});
+    $('#gistModal').on('hidden.bs.modal', function(e){
+        $('#gistModalBody').html('');
+    });
 
 }
 
