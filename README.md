@@ -26,7 +26,7 @@ After logging in to your mongo instance you should create a database for brightc
 ```
 use brightchat
 db.addUser({ user: "brightchat", pwd: "brightchat", roles : [  "readWrite" ] })
-``
+```
 
 This default setting can be found is settings.json if you need to change it
 
