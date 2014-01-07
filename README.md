@@ -14,9 +14,22 @@ npm install -g supervisor
 supervisor server.js
 ```
 
-Though not currently required, later you may need to have a mongodb instance and it properly configured in order to use this app. But for right now in
-the early stages of development it is not required.
+## MongoDB
+User profiles are stored in MongoDB. So having this up and running will be a requirement from this point on. You first should startup your MongoDB instance
+with:
 
-# Contribution
+```
+sudo mongod 
+```
+After logging in to your mongo instance you should create a database for brightchat and a default user. This can be done with:
+
+```
+use brightchat
+db.addUser({ user: "brightchat", pwd: "brightchat", roles : [  "readWrite" ] })
+```
+
+This default setting can be found is settings.json if you need to change it
+
+## Contribution
 BrightChat is designed to be a public research project for all folks that have access to git.bhn.net, however, in order to
 contribute you must first read the [CONTRIBUTE.md](http://git.bhn.net/rnd/brightchat/wikis/contribution-guidelines) and understand how to do so as this project is readonly.

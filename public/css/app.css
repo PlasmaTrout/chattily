@@ -3,17 +3,31 @@ body,html{
 }
 
 #view {
-    position:relative;
+    position:absolute;
     top:0px;
     left:0px;
     height:100%;
+    width:100%;
     max-height:100%;
     min-height:600px;
-    overflow:visible;
+    overflow:hidden;
 
 }
-.page {
+
+#ChatView {
+    margin-bottom:180px;
+    padding-bottom:120px;
+    padding-left:10px;
+    word-wrap:break-word;
+    word-break:normal;
+    margin-top:40px;
+    vertical-align:bottom;
     overflow:scroll;
+    min-height:80%;
+    min-width:80%;
+}
+.page {
+    overflow:hidden;
     height:100%;
 }
 #app{
@@ -103,6 +117,7 @@ body,html{
     bottom:0px;
     left:0px;
     padding:10px;
+    width:79%;
     background:#ffffff;
 }
 
@@ -113,6 +128,12 @@ body,html{
 
 }
 
+.user-list-item {
+    background:#ffffff;
+}
+.user-list-item:hover {
+    background:#ededff;
+}
 .mention{
     background:#d3d3d3;
 }

@@ -13,6 +13,17 @@ App.settings = {
 App.templates = {};
 App.history = [];
 
+App.localstorage = window.localStorage;
+var history = App.localstorage.getItem("history");
+if(history){
+    try{
+        App.history = JSON.parse(history);
+    } catch(e){
+        App.history = [];
+        App.localstorage.setItem("history", JSON.stringify(App.history));
+    }
+
+}
 function load_template(name, path){
     $.ajax({
         url: path,
@@ -21,6 +32,12 @@ function load_template(name, path){
             App.templates[name] = contents;
         }
     })
+}
+
+function prepare_tell(username){
+    $("#chatLine").val('/tell '+username+' <message>');
+    $("#chatLine")[0].selectionStart = $("#chatLine").val().length - 9;
+    $("#chatLine")[0].selectionEnd = $("#chatLine").val().length;
 }
 
 function load_gist(gist){
@@ -33,8 +50,22 @@ function load_gist(gist){
             $('#gistModalBody').html(data.div);
             $('#gistModalLabel').text(data.description);
             $('#gistModal').modal({backdrop:false, show:true});
+            $('#gistModal').on('hidden.bs.modal', function(e){
+                $('#gistModalBody').html('');
+            });
         }
     });
+}
+
+function load_youtube(video){
+
+    $('#gistModalBody').html('<iframe width="538" height="315" src="http://www.youtube.com/embed/'+video+'?rel=0" frameborder="0" allowfullscreen></iframe>');
+    $('#gistModalLabel').text("Youtube");
+    $('#gistModal').modal({backdrop:false, show:true});
+    $('#gistModal').on('hidden.bs.modal', function(e){
+        $('#gistModalBody').html('');
+    });
+
 }
 
 function alert(message){

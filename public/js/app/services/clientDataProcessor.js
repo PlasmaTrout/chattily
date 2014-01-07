@@ -13,7 +13,7 @@ jpackage("app.services", function(){
            var div = $('<div></div>');
            var container = $(el);
            div.addClass(data.type.replace('/',''));                                                    //escape html lt & gt symbols to prevent html text - see jbbcode in _process
-           div.html(this._process(data.type, DateUtil.formatDate(date, "hh:nn:ss"), data.user,(data.message.replace(/</g, "&lt;").replace(/>/g, "&gt;"))));
+           div.html(this._process(data.type, DateUtil.formatDate(date, "h:nn:ss"), 'u|'+data.user,(data.message.replace(/</g, "&lt;").replace(/>/g, "&gt;"))));
            div.html(this._imgify(div));
            if(data.user !== App.settings.user.name){
                if(data.message.indexOf(App.settings.user.name) > 0){
@@ -21,13 +21,32 @@ jpackage("app.services", function(){
                }
            }
            container.append(div);
+           $(div.children()).each(function(i, elm){
+               var attr = $(elm).attr("href");
+               if(attr){
+                   var regExp = /.*(?:youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=)([^#\&\?]*).*/;
+                   var match = attr.match(regExp);
+                   if (match&&match[1].length==11){
+                       $(elm).attr("href", "javascript:load_youtube('"+match[1]+"');");
+                   }
+
+               }
+               if($(elm).html().substr(0, 2) == 'u|'){
+                   var user_say = $(elm);
+                   var user = user_say.html().substr(2, user_say.html().length);
+                   var tell_link = $("<a></a>");
+                   tell_link.attr("href", "javascript:prepare_tell('"+user+"');");
+                   tell_link.html(user);
+                   $(elm).html(tell_link);
+               }
+
+           });
            if(container.children().length > 50){
              container.children("div:first").remove();
            }
            //container.parent().animate({ scrollTop: container.parent()[0].scrollHeight}, 100);
            //container.animate({ scrollTop: container.attr("scrollHeight") }, 3000);
            this._scroll();
-
 
            $.titleAlert("New Message", {
                requireBlur:true,
@@ -39,15 +58,16 @@ jpackage("app.services", function(){
 
        this._scroll = function(){
            var div = $(el).children("div:last");
-           var scrollHeight = $('.page')[0].scrollHeight;
+           var scrollHeight = $('#ChatView')[0].scrollHeight;
            if(scrollHeight > DOC_HEIGHT){
-               $(".page").animate({ scrollTop: scrollHeight }, 100);
+               $("#ChatView").animate({ scrollTop: scrollHeight }, 100);
+               $(".footer").animate({bottom: 0}, 100);
            }
        }
        this._process = function(type, time, user, message){
 
            if(type === "emote"){
-               return time + ": "+user+" "+message;
+               return time + ": "+user.substr(2, user.length)+" "+message;
            }
 
            var result = JBBCODE.process({
@@ -90,6 +110,7 @@ jpackage("app.services", function(){
            //Change email addresses to mailto:: links.
            replacePattern3 = /(([a-zA-Z0-9\-\_\.])+@[a-zA-Z\_]+?(\.[a-zA-Z]{2,6})+)/gim;
            replacedText = replacedText.replace(replacePattern3, '<a href="mailto:$1">$1</a>');
+
 
            return replacedText;
 
