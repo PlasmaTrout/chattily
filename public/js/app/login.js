@@ -20,7 +20,7 @@ $(document).ready(function(){
                 console.log(data);
                 if(data.success){
                     App.settings.user = {};
-                    App.settings.user.name = data.user.cn;
+                    App.settings.user.name = data.user.uid;
                     App.settings.user.fullName = data.user.fullName;
                     App.settings.user.email = data.user.mail;
                     App.settings.user.hash = md5(data.user.mail);
