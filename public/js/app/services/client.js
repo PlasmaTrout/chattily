@@ -93,6 +93,11 @@ jpackage("app.services", function(){
                cmdObj.command = parts.pop();
                parts.reverse();
                cmdObj.args = parts;
+
+               if(cmdObj.command === "/clear"){
+                   $('#ChatView').html("");
+                   return;
+               }
            } else {
                // Otherwise the command is just a say command to the channel
                cmdObj.command = "/say";
