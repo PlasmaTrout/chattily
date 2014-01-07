@@ -19,7 +19,7 @@ exports.authenticateUser = function(req,res) {
     		console.log("Error: "+err);
     	}
     	if(user){
-            
+            console.log(user);
             profile.upsertProfile(user,function(success){
                 if(success){
                     profile.getProfile(user.uid,function(data){

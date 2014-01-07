@@ -75,6 +75,7 @@ jpackage("app.ui", function() {
             var command = $('input[type=text]').val();
             if(command !== ""){
                 _this.client.send(command);
+                _this.historyIndex = 0;
             }
             $('input[type=text]').val('');
         },
