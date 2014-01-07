@@ -24,7 +24,7 @@ jpackage("app.services", function(){
            $(div.children()).each(function(i, elm){
                var attr = $(elm).attr("href");
                if(attr){
-                   var regExp = /.*(?:youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=)([^#\&\?]*).*/;
+                   var regExp = /.*(?:youtu.be\/|youtube.com\/|u\/\w\/|embed\/|watch\?v=)([^#\&\?]*).*/;
                    var match = attr.match(regExp);
                    if (match&&match[1].length==11){
                        $(elm).attr("href", "javascript:load_youtube('"+match[1]+"');");
