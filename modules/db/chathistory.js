@@ -28,7 +28,7 @@ exports.getLastMessages = function(req,res) {
     var query = { command: '/say' };
 
 	if(req.params.uid){
-		query = { command: '/say',uid: req.params.uid };
+		query = { command: '/say', uid: req.params.uid };
 	}
 
 	conn.db.collection(channel,function(err,collection) {
