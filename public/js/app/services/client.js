@@ -95,7 +95,7 @@ jpackage("app.services", function(){
                cmdObj.args = parts;
 
                if(cmdObj.command === "/clear"){
-                   $('#ChatView').html("");
+                   $('#ChatView').html("<br/><br/><br/>Cleared Chat!<br/>");
                    return;
                }
            } else {
