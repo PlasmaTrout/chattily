@@ -59,11 +59,11 @@ function load_gist(gist){
 
 function load_youtube(video){
 
-    $('#gistModalBody').html('<iframe width="538" height="315" src="http://www.youtube.com/embed/'+video+'?rel=0" frameborder="0" allowfullscreen></iframe>');
-    $('#gistModalLabel').text("Youtube");
-    $('#gistModal').modal({backdrop:false, show:true});
-    $('#gistModal').on('hidden.bs.modal', function(e){
-        $('#gistModalBody').html('');
+    $('#mediaModalBody').html('<iframe width="538" height="315" src="http://www.youtube.com/embed/'+video+'?rel=0" frameborder="0" allowfullscreen></iframe>');
+    $('#mediaModalLabel').text("Youtube");
+    $('#mediaModal').modal({backdrop:false, show:true});
+    $('#mediaModal').on('hidden.bs.modal', function(e){
+        $('#mediaModalBody').html('');
     });
 
 }
