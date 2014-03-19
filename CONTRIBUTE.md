@@ -100,7 +100,7 @@ included in the project:
    # Clone your fork of the repo into the current directory
    git clone git@github.com:<your username>/chattily.git
    # Navigate to the newly cloned directory
-   cd brightchat.git
+   cd chattily.git
    # Assign the original repo to a remote called "upstream"
    git remote add upstream git@github.com:gabereiser/chattily.git
    ```
