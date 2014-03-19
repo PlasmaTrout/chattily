@@ -32,4 +32,4 @@ This default setting can be found is settings.json if you need to change it
 
 ## Contribution
 Chatti.ly was designed to be a public research project for all folks at Bright House Networks, however, in order to
-contribute you must first read the [CONTRIBUTE.md](https://github.com/gabereiser/chattily) and understand how to do so as this project is readonly.
+contribute you must first read the [CONTRIBUTE.md](https://github.com/gabereiser/chattily/blob/master/CONTRIBUTE.md) and understand how to do so as this project is readonly.
