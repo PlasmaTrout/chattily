@@ -32,7 +32,7 @@ Good bug reports are extremely helpful - thank you!
 
 Guidelines for bug reports:
 
-1. **Use the gitlab [issue search](https://github.com/gabereiser/chattily/issues)** &mdash; check if the issue has already been
+1. **Use github's [issue search](https://github.com/gabereiser/chattily/issues)** &mdash; check if the issue has already been
    reported.
 
 2. **Check if the issue has been fixed** &mdash; try to reproduce it using the
