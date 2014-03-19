@@ -1,4 +1,4 @@
-# Contributing to BrightChat
+# Contributing to Chattily
 
 Want to get involved?
 Thanks! There are plenty of ways you can help!
@@ -14,12 +14,12 @@ patches and features.
 
 ## Using the issue tracker
 
-The [issue tracker](http://git.bhn.net/rnd/brightchat/issues) is
+The [issue tracker](https://github.com/gabereiser/chattily/issues) is
 the preferred channel for [bug reports](#bugs), [features requests](#features)
 and [submitting pull requests](#pull-requests), but please respect the following
 restrictions:
 
-* Please **do not** use the issue tracker for personal support requests use the [wall](http://git.bhn.net/rnd/brightchat/wall) for that.
+* Please **do not** use the issue tracker for personal support requests.
 
 * Please **do not** derail or troll issues. Keep the discussion on topic and
   respect the opinions of others.
@@ -32,7 +32,7 @@ Good bug reports are extremely helpful - thank you!
 
 Guidelines for bug reports:
 
-1. **Use the gitlab [issue search](http://git.bhn.net/rnd/brightchat/issues)** &mdash; check if the issue has already been
+1. **Use the gitlab [issue search](https://github.com/gabereiser/chattily/issues)** &mdash; check if the issue has already been
    reported.
 
 2. **Check if the issue has been fixed** &mdash; try to reproduce it using the
@@ -93,16 +93,16 @@ accurate comments, etc.) and any other requirements (such as test coverage).
 Adhering to the following this process is the best way to get your work
 included in the project:
 
-1. [Fork](http://git.bhn.net/rnd/brightchat) the project, clone your fork,
+1. [Fork](https://github.com/gabereiser/chattily) the project, clone your fork,
    and configure the remotes:
 
    ```bash
    # Clone your fork of the repo into the current directory
-   git clone git@git.bhn.net:<your username>/brightchat.git
+   git clone git@github.com:<your username>/chattily.git
    # Navigate to the newly cloned directory
    cd brightchat.git
    # Assign the original repo to a remote called "upstream"
-   git remote add upstream git@git.bhn.net:rnd/brightchat.git
+   git remote add upstream git@github.com:gabereiser/chattily.git
    ```
 
 2. If you cloned a while ago, get the latest changes from upstream:
@@ -137,7 +137,7 @@ included in the project:
    git push origin <topic-branch-name>
    ```
 
-7. [Open a Merge Request](http://git.bhn.net/rnd/brightchat/merge_requests/new)
+7. [Open a Pull Request](https://github.com/gabereiser/chattily/pulls)
     with a clear title and description.
 
 **IMPORTANT**: By submitting a patch, you agree to allow the project owners to
