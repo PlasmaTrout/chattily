@@ -1,27 +1,13 @@
 
 {
     "port":8080,
-    "ldap": {
-        "url" : "corp.local",
-        "port" : 389,
-        "org" : "DC=corp,DC=local",
-        "uid" : "sAMAccountName",
-        "adminUser": "atimldap",
-        "adminPass": "CFLkms11",
-        "adminUser2": "OSDCollab",
-        "adminPass2": "nzBawtT4BU"
-    },
-    "ldap2": {
-        "url": "ldaprr.bhntampa.com",
-        "port": 389,
-        "org": "o=bhntampa",
-        "uid": "cn"
-    },
     "mongo": {
         "server": "localhost",
         "db": "brightchat",
         "port":27017,
-        "user": "brightchat",
-        "pass": "brightchat"
+		"options": {
+		  "db": { "native_parser": true },
+		  "server": { "poolSize": 5, "socketOptions": { "keepAlive": 1} }
+		}
     }
 }

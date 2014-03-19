@@ -17,7 +17,7 @@ exports.execute = function(context, callback){
     context.args = parts.join(' ');
     context.type = "private_message";
 
-    if(context.sockets) {
+    if(context.sockets && (context.user !== username)) {
         ctx.setMessage(context.args);
         //send a message to the sender (so his sent /tell shows up in chat)
         context.sockets.in(context.user).emit("private_message",ctx);

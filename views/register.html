@@ -1,0 +1,114 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Register</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Le styles -->
+    <link href="./css/bootstrap.min.css" rel="stylesheet">
+    <style type="text/css">
+        body {
+            padding-top: 40px;
+            padding-bottom: 40px;
+            background-color: #eee;
+        }
+
+        .form-register {
+            max-width: 330px;
+            padding: 15px;
+            margin: 0 auto;
+        }
+        .form-register .form-signin-heading,
+        .form-register .checkbox {
+            margin-bottom: 10px;
+        }
+        .form-register .checkbox {
+            font-weight: normal;
+        }
+        .form-register .form-control {
+            position: relative;
+            font-size: 16px;
+            height: auto;
+            padding: 10px;
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+        .form-register .form-control:focus {
+            z-index: 2;
+        }
+        .form-register input[type="text"] {
+            margin-bottom: -1px;
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 0;
+        }
+        #form-first {
+			width:48%;
+			display:inline;
+			float:left;
+			border-bottom-left-radius: 5px;
+            border-bottom-right-radius: 5px;
+		}
+		#form-last {
+			width:48%;
+			display:inline;
+			float:right;
+			margin-left:5px;
+			margin-bottom:10px;
+			border-bottom-left-radius: 5px;
+            border-bottom-right-radius: 5px;
+		}
+        .form-register input[type="password"] {
+			margin-bottom: -1px;
+            border-top-left-radius: 0;
+            border-top-right-radius: 0;
+        }
+		
+    </style>
+    <link href="./css/bootstrap-theme.min.css" rel="stylesheet">
+    <script src="./js/vendor/md5.min.js"></script>
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+    <script src="./js/vendor/html5shiv.js"></script>
+    <![endif]-->
+
+    <!-- Fav and touch icons -->
+    <!-- <link rel="shortcut icon" href="../assets/ico/favicon.png"> -->
+</head>
+
+<body>
+
+<div class="container">
+
+    <form class="form-register" id="register-form">
+        <h2 class="form-register-heading">Please Register</h2>
+		<input type="text" id="form-first" class="form-control" placeholder="First Name" required autofocus>
+		<input type="text" id="form-last" class="form-control" placeholder="Last Name" required>
+        <input type="text" id="form-u" class="form-control" placeholder="Username" required>
+        <input type="password" id="form-p" class="form-control" placeholder="Password" required>
+		<input type="password" id="form-p2" class="form-control" placeholder="Password Confirmation" required><br/>
+		<input type="email" id="form-e" class="form-control" placeholder="Email" required><br/>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Register</button>
+    </form>
+    <div class="alert alert-danger" style="display:none;">
+        <span class="label label-danger">Alert</span> <span id="error"></span>
+    </div>
+
+</div> <!-- /container -->
+
+<!-- Le javascript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="./js/vendor/jquery-1.10.2.min.js"></script>
+<script src="./js/vendor/bootstrap.min.js"></script>
+<script src="./js/vendor/cookies.js"></script>
+<script src="./js/app/app.js"></script>
+<script src="./js/base64.js"></script>
+<script src="./js/app/register.js"></script>
+
+</body>
+</html>

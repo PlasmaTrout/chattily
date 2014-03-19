@@ -18,12 +18,12 @@ $(document).ready(function(){
            method: 'post',
            success: function(data){
                 console.log(data);
+				debugger;
                 if(data.success){
                     App.settings.user = {};
-                    App.settings.user.name = data.user.uid;
-                    App.settings.user.fullName = data.user.fullName;
-                    App.settings.user.email = data.user.mail;
-                    App.settings.user.hash = md5(data.user.mail);
+                    App.settings.user.username = data.user.username;
+                    App.settings.user.email = data.user.email;
+                    App.settings.user.hash = md5(data.user.email);
                     App.settings.user.enc_pass = base64.encode(encodeURIComponent($("#form-p").val()));
                     CookieUtil.write("sec", JSON.stringify(App.settings.user), null, '/', null);
                     window.location = "/";

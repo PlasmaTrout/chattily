@@ -9,13 +9,9 @@
 jpackage("app.models", function(){
     this.UserModel = Backbone.Model.extend({
         defaults: {
-            uid: '',
             email: '',
-            name: '',
-            _id: '',
-            rooms: [],
-            location: 'work'
-
+            username: '',
+            id: ''
         },
 
         initialize: function(){

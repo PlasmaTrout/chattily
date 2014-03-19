@@ -68,7 +68,7 @@ jpackage("app.services", function(){
            this.socket.on("connect", function(clientObj){
                _this.isReloadRequired();
                $("#errorAlert").hide();
-               _this.socket.emit("auth", {"user":App.settings.user.name, "pass":App.settings.user.enc_pass});
+               _this.socket.emit("auth", {"user":App.settings.user.username, "pass":App.settings.user.enc_pass});
                setTimeout(function(){_this._info('<br/>Joined Channel!')}, 500);
            });
        };
@@ -81,7 +81,7 @@ jpackage("app.services", function(){
                App.history.reverse();
            }
            var cmdObj = {
-               user: App.settings.user.name,
+               user: App.settings.user.username,
                channel: "global"
            };
            // If the incoming line is an actual command its prefixed with a /

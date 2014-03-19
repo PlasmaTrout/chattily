@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width">
+
+
+        <link rel="stylesheet" href="./css/bootstrap.css">
+        <link rel="stylesheet" href="./css/bootstrap-theme.css">
+        <link rel="stylesheet" href="./css/jbbcode.css">
+        <link rel="stylesheet" href="./css/app.css">
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+        <script>window.jQuery || document.write('<script src="./js/vendor/jquery-1.10.2.min.js"><\/script>')</script>
+        <script src="/js/vendor/jquery.titlealert.js"></script>
+        <script src="/js/vendor/jquery.translate3d.js"></script>
+        <script src="./js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+        <script src="./js/vendor/underscore-min.js"></script>
+        <script src="./js/vendor/md5.min.js"></script>
+        <script src="/socket.io/socket.io.js"></script>
+        <script src="/js/date.js"></script>
+
+    </head>
+    <body>
+        <!--[if lt IE 7]>
+            <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+        <![endif]-->
+
+        <!-- This code is taken from http://twitter.github.com/bootstrap/examples/hero.html -->
+        <div id="app">
+        <nav class="navbar navbar-default navbar-static-top" style="position:fixed; top:0px; width:100%;" role="navigation">
+          <!-- Brand and toggle get grouped for better mobile display -->
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#menu">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">chatti.ly</a>
+          </div>
+          <span class="navbar-text navbar-right visible-sm visible-md visible-lg" style="margin-top:8px; margin-bottom:8px; height:20px">
+              <span id="signed_in_as"></span>
+              <button type="button" id="logout" class="btn btn-danger btn-xs navbar-btn">Logout</button>
+          </span>
+
+        </nav>
+        <div class="page" style="padding: 0 15px;">
+
+            <div id="errorAlert" class="alert alert-danger alert-float"></div>
+            <div id="view" style="">
+
+            </div>
+            <div class="modal fade" id="gistModal" tabindex="-1" role="dialog" aria-labelledby="gistModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-large">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <h4 class="modal-title" id="gistModalLabel">Gist</h4>
+                        </div>
+                        <div class="modal-body" id="gistModalBody">
+
+                        </div>
+                    </div><!-- /.modal-content -->
+                </div><!-- /.modal-dialog -->
+            </div><!-- /.modal -->
+            <div class="modal fade" id="mediaModal" tabindex="-1" role="dialog" aria-labelledby="mediaModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <h4 class="modal-title" id="mediaModalLabel">Gist</h4>
+                        </div>
+                        <div class="modal-body" id="mediaModalBody">
+
+                        </div>
+                    </div><!-- /.modal-content -->
+                </div><!-- /.modal-dialog -->
+            </div><!-- /.modal -->
+        </div>
+            </div>
+            <div id="menu">
+                <ul class="list-unstyled">
+                    <li><a href="#" id="loggedInUser"></a></li>
+                    <li class="divider"></li>
+                    <li><a href="/">Chat</a></li>
+                    <li><a href="/rooms">Rooms</a></li>
+                    <li><a href="/profile">Profile</a></li>
+                    <li><a href="/profile/location">Location</a></li>
+                    <li><a href="/logout">Logout</a></li>
+                    <li class="divider"></li>
+                    <li>Users Online</li>
+                    <li class="menuUsers"></li>
+                </ul>
+            </div>
+
+        <script src="/js/vendor/underscore.js"></script>
+
+        <script src="./js/vendor/backbone-min.js"></script>
+        <!-- <script src="./js/vendor/require-jquery.js"></script> -->
+        <script src="./js/vendor/jbbcode.js"></script>
+        <script src="/js/vendor/cookies.js"></script>
+        <script src="./js/base64.js"></script>
+        <script src="/js/vendor/json2.js"></script>
+        <script src="/js/jparcel.js"></script>
+        <script src="/js/app/app.js"></script>
+        <script>
+            //Template Definitions go here
+            load_template("ChatViewTemplate", "/templates/ChatView.html");
+            load_template("UsersViewTemplate", "/templates/UsersView.html");
+
+        </script>
+        <script src="./js/app/services/client.js"></script>
+        <script src="./js/app/services/clientDataProcessor.js"></script>
+        <script src="/js/vendor/bootstrap.js"></script>
+        <script src="/js/app/models/UserModel.js"></script>
+        <script src="/js/app/collections/UserCollection.js"></script>
+        <script src="/js/app/ui/ChatView.js"></script>
+        <script src="/js/app/ui/UsersView.js"></script>
+        <script src="/js/app/menu.js"></script>
+
+        <script src="/js/main.js"></script>
+        <script>
+            var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
+            (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+            g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+            s.parentNode.insertBefore(g,s)}(document,'script'));
+        </script>
+    </body>
+</html>

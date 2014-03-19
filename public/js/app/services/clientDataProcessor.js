@@ -13,7 +13,7 @@ jpackage("app.services", function(){
            var div = $('<div></div>');
            var container = $(el);
            div.addClass(data.type.replace('/',''));                                                    //escape html lt & gt symbols to prevent html text - see jbbcode in _process
-           div.html(this._process(data.type, DateUtil.formatDate(date, "h:nn:ss"), 'u|'+data.user,(data.message.replace(/</g, "&lt;").replace(/>/g, "&gt;"))));
+           div.html(this._process(data.type, DateUtil.formatDate(date, "h:nna"), 'u|'+data.user,(data.message.replace(/</g, "&lt;").replace(/>/g, "&gt;"))));
            div.html(this._imgify(div));
            if(data.user !== App.settings.user.name){
                if(data.message.indexOf(App.settings.user.name) > 0){
@@ -71,7 +71,7 @@ jpackage("app.services", function(){
            }
 
            var result = JBBCODE.process({
-               text: "[color=grey]"+time+"[/color]: [color=blue]"+user+"[/color] - "+message+"",
+               text: "[color=gray]"+time+"[/color] [color=blue]"+user+"[/color] - "+message+"",
                removeMisalignedTags: false,
                addInLineBreaks: false
            });

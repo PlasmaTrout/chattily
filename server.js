@@ -5,12 +5,12 @@ var socket = require('socket.io');
 var http = require('http');
 var path = require('path');
 var socket = require('socket.io');
-var cm = require('./modules/restmodules/channels');
-var rauth = require('./modules/restmodules/auth');
+var cm = require('./api/channels');
+var rauth = require('./api/auth');
+var channels = require('./api/channels');
 var users = require('./modules/collections/users');
-var history = require('./modules/db/chathistory');
-var profile = require('./modules/db/profiledb');
 var exec = require('child_process').exec;
+var db = require('./modules/db/mongo.js');
 var app = express();
 
 var emit = function(room,type,message) {
@@ -45,16 +45,15 @@ io.sockets.on('connection',function(socket){
 
         rauth.socketAuthentication(data.user, data.pass, function(ret){
             
-            if(ret.success && ret.user.uid){
-                console.log(ret.user.uid+" has successfully logged on!");
+            if(ret.success && ret.user._id){
+                console.log(ret.user._id+" has successfully logged on!");
                 users.addUser(data.user, socket.id);
-                profile.addMembershipToRoom("global",ret.user.uid);
-
-                socket.set("username", data.user, function(){
-                    socket.set("email", data.email, function(){});
+                socket.set("username", ret.user.username, function(){
+                    socket.set("email", ret.user.email, function(){});
+					socket.set("_id", ret.user._id, function(){});
                     socket.join('global');
-                    io.sockets.in("global").emit("info",data.user+" connected!");
-                    socket.join(data.user);
+                    io.sockets.in("global").emit("info",ret.user.username+" connected!");
+                    socket.join(ret.user.username);
                 });
             } else {
                 socket.emit("rejected due auth failure");
@@ -66,7 +65,7 @@ io.sockets.on('connection',function(socket){
     socket.on('disconnect', function() {
         socket.get("username",function(err,data){
             io.sockets.in("global").emit("info",data+" disconnected!");
-            profile.removeMembershipsForUser(data);
+            socket.leave('global');
         });
         delete io.sockets[socket.id];
     });
@@ -102,25 +101,25 @@ io.sockets.on('connection',function(socket){
 
     socket.on('join', function(data){
         socket.join(data.room);
-        socket.broadcast.in(data.room).emit("joined", socket.store.data.nickname);
+        socket.broadcast.in(data.room).emit("joined", socket.store.data.username);
     });
     socket.on('leave', function(data){
         socket.leave(data.room);
-        socket.broadcast.in(data.room).emit("left", socket.store.data.nickname);
+        socket.broadcast.in(data.room).emit("left", socket.store.data.username);
     });
 });
 
 // HTTP Definitions
 // TODO: Refactor these somewhere more elegant
-
+/*
 app.get('/rooms/list', function(req,res){
   cm.getActiveRooms(req,res,io.sockets);
 });
-
+*/
 app.get("/rooms/:room", function(req,res){
-  profile.getRoomMembers(req,res);
+  channels.getSocketsInRoom(req,res,io.sockets);
 });
-
+/*
 app.get("/rooms/:channel/:limit",function(req,res){
     history.getLastMessages(req,res);
 });
@@ -132,8 +131,10 @@ app.get("/rooms/:channel/:uid/:limit",function(req,res){
 app.get("/locations/:year/:month/:day",function(req,res){
     profile.getLocationReport(req,res);
 });
-
+*/
 app.post("/users/authenticate",rauth.authenticateUser);
+
+app.post("/users/register",rauth.registerUser);
 
 app.get('/health', function(req, res){
   var body = 'ok';
@@ -144,7 +145,11 @@ app.get('/health', function(req, res){
 });
 
 app.get('/login', function(req,res){
-    res.sendfile('./modules/views/login.html');
+    res.sendfile('./views/login.html');
+});
+
+app.get('/register', function(req,res){
+    res.sendfile('./views/register.html');
 });
 
 app.get('/logout', function(req,res){
@@ -155,7 +160,7 @@ app.get('/logout', function(req,res){
 app.get('/', function(req, res){
     if(req.cookies){
         if(req.cookies.sec){
-            res.sendfile('./modules/views/index.html');
+            res.sendfile('./views/index.html');
         } else {
             res.redirect('/login');
         }
@@ -172,9 +177,8 @@ var port = settings.port;
 if(process.argv[2]){
     port = process.argv[2];
 }
-
+db.connect();
 // Clears out all db data rooms before the server starts
-profile.clearAllMemberships();
 socketServer.listen(port);
 
 console.log('Listening on port '+port+', use http://localhost:'+port+'/health to test.');
