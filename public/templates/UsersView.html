@@ -1,9 +1,8 @@
 <div class="pull-right" id="usersView" style="border-left:2px solid #d3d3d3; position:fixed; padding:0px 5px 40px 5px; margin:0px; top:50px; right:0px; width:200px; height: 95%; min-height:90%; max-height:95%; background:#ffffff; overflow:scroll">
-    <h4>Users: <%= users.length %></h4>
     <div id="userPanel" style="vertical-align:top;">
     <% _.each(users, function(user){ var u = user.attributes; %>
 
-        <div style="font-size:0.9em; cursor:pointer; padding:5px 0px 5px 0px;" class="user-list-item" data-user="<%= u.id %>"><img style="width:30px;" src="http://www.gravatar.com/avatar/<%= md5(u.email.toString().toLowerCase()) %>"/> <%= u.username %></div>
+        <div style="font-size:0.9em; cursor:pointer; padding:5px 0px 5px 0px;" class="user-list-item" data-user="<%= u.id %>" onclick="prepare_tell('<%= u.username %>');"><img style="width:30px;" src="http://www.gravatar.com/avatar/<%= md5(u.email.toString().toLowerCase()) %>"/> <%= u.username %></div>
     <%   }); %>
     </div>
 </div>

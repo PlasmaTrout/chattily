@@ -16,9 +16,12 @@ exports.authenticateUser = function(req,res) {
     		
     	}
     	if(u){
-            console.log(u);
             returnObj.success = true;
             returnObj.user = u;
+            res.send(returnObj);
+		} else {
+			returnObj.success = false;
+            returnObj.errors = { message: 'Username/Password incorrect!' };
             res.send(returnObj);
 		}
                 

@@ -1,6 +1,9 @@
 body,html{
     height:100%;
 }
+::-webkit-scrollbar {
+    display: none;
+}
 
 #view {
     position:absolute;
@@ -180,4 +183,21 @@ body,html{
 .modal-large {
     width: 80%; /* respsonsive width */
     /*margin-left:-40%; /* width/2) */
+}
+
+.logo {
+	position:absolute;
+	float:left;
+	left:10px;
+	top:6px;
+	height:40px;
+	width:80px;
+	clear:none;
+}
+.nav-action {
+	font-size:1.0em;
+	cursor:pointer;
+}
+.nav-action:hover {
+	cursor:hand;
 }

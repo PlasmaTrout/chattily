@@ -18,7 +18,6 @@ $(document).ready(function(){
            method: 'post',
            success: function(data){
                 console.log(data);
-				debugger;
                 if(data.success){
                     App.settings.user = {};
                     App.settings.user.username = data.user.username;

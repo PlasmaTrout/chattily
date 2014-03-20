@@ -42,11 +42,14 @@
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">chatti.ly</a>
+            <a class="navbar-brand" href="#"><img class="logo" src="/img/logo-sm.png" border=0 alt="Chattily"></a>
           </div>
-          <span class="navbar-text navbar-right visible-sm visible-md visible-lg" style="margin-top:8px; margin-bottom:8px; height:20px">
-              <span id="signed_in_as"></span>
-              <button type="button" id="logout" class="btn btn-danger btn-xs navbar-btn">Logout</button>
+          <span class="navbar-text navbar-right visible-sm visible-md visible-lg" style="margin-top:15px; margin-bottom:8px; height:20px">
+            <span id="signed_in_as"></span>&nbsp;&nbsp;&nbsp;&nbsp;
+			<span id="profile" class="nav-action glyphicon glyphicon-user" data-toggle="tooltip" data-placement="bottom" title="View Profile"></span>&nbsp;&nbsp;&nbsp;&nbsp;
+			<span id="notification" class="nav-action glyphicon glyphicon-bell" data-toggle="tooltip" data-placement="bottom" title="Notifications"></span>&nbsp;&nbsp;&nbsp;&nbsp;
+			<span id="settings" class="nav-action glyphicon glyphicon-cog" data-toggle="tooltip" data-placement="bottom" title="Settings"></span>&nbsp;&nbsp;&nbsp;&nbsp;
+			<span id="logout" class="nav-action glyphicon glyphicon-log-out" data-toggle="tooltip" data-placement="bottom" title="Logout"></span>
           </span>
 
         </nav>
@@ -113,7 +116,7 @@
             //Template Definitions go here
             load_template("ChatViewTemplate", "/templates/ChatView.html");
             load_template("UsersViewTemplate", "/templates/UsersView.html");
-
+			
         </script>
         <script src="./js/app/services/client.js"></script>
         <script src="./js/app/services/clientDataProcessor.js"></script>
@@ -131,5 +134,17 @@
             g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
             s.parentNode.insertBefore(g,s)}(document,'script'));
         </script>
+
+		<script>		
+			var tOptions = {
+				placement: 'bottom',
+				trigger: 'hover',
+				delay: 250
+			};
+			$("#profile").tooltip(tOptions);
+			$("#notification").tooltip(tOptions);
+			$("#settings").tooltip(tOptions);
+			$("#logout").tooltip(tOptions);
+		</script>
     </body>
 </html>
