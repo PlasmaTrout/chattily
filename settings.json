@@ -3,7 +3,7 @@
     "port":8080,
     "mongo": {
         "server": "localhost",
-        "db": "brightchat",
+        "db": "chat",
         "port":27017,
 		"options": {
 		  "db": { "native_parser": true },

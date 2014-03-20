@@ -88,7 +88,7 @@ io.sockets.on('connection',function(socket){
 	    	};
 
 	    	cmd.execute(context,function(data){
-	    		history.saveMessageNoCallback(context);
+	    		
 	    	});
 
     	} catch(e) {
