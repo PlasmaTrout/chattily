@@ -1,10 +1,13 @@
 
 var settings = require('./settings.json');
 var express = require('express');
-var socket = require('socket.io');
+var socket = require('socket.io')({
+   username: 'anonymous',
+   email: 'none',
+   _id: ''
+});
 var http = require('http');
 var path = require('path');
-var socket = require('socket.io');
 var cm = require('./api/channels');
 var rauth = require('./api/auth');
 var channels = require('./api/channels');
@@ -48,13 +51,19 @@ io.sockets.on('connection',function(socket){
             if(ret.success && ret.user._id){
                 console.log(ret.user._id+" has successfully logged on!");
                 users.addUser(data.user, socket.id);
-                socket.set("username", ret.user.username, function(){
+                socket.username = ret.user.username;
+                socket.email = ret.user.email;
+                socket._id = ret.user._id;
+                socket.join('global');
+                io.sockets.in("global").emit("info",ret.user.username+" connected!");
+                socket.join(ret.user.username);
+                /*socket.set("username", ret.user.username, function(){
                     socket.set("email", ret.user.email, function(){});
 					socket.set("_id", ret.user._id, function(){});
                     socket.join('global');
-                    io.sockets.in("global").emit("info",ret.user.username+" connected!");
+                    
                     socket.join(ret.user.username);
-                });
+                });*/
             } else {
                 socket.emit("rejected due auth failure");
             }
@@ -63,10 +72,9 @@ io.sockets.on('connection',function(socket){
     });
 
     socket.on('disconnect', function() {
-        socket.get("username",function(err,data){
-            io.sockets.in("global").emit("info",data+" disconnected!");
-            socket.leave('global');
-        });
+        var data = socket.username;
+        io.sockets.in("global").emit("info",data+" disconnected!");
+        socket.leave('global');
         delete io.sockets[socket.id];
     });
 
@@ -117,7 +125,7 @@ app.get('/rooms/list', function(req,res){
 });
 */
 app.get("/rooms/:room", function(req,res){
-  channels.getSocketsInRoom(req,res,io.sockets);
+  channels.getSocketsInRoom(req,res,io);
 });
 /*
 app.get("/rooms/:channel/:limit",function(req,res){

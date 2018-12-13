@@ -7,14 +7,23 @@ exports.getActiveRooms = function(req,res,sockets) {
 	}
 }
 
-exports.getSocketsInRoom = function(req,res,sockets) {
+exports.getSocketsInRoom = function(req,res,io) {
 	var room = req.params.room;
+	console.log(room);
 
-	if(sockets) {
-		var ids = sockets.clients(room).map(function(item){
-            return { "username":item.store.data.username, "id":item.store.data._id, "email":item.store.data.email };
+	if(io) {
+		var ids = [];
+		io.of(room).clients((error,clients) => {
+			clients.forEach(element => {
+				ids.push({
+					username: element.username
+				});
+			});
 		});
-
+		/*.map(function(item){
+            return { "username":item.store.data.username, "id":item.store.data._id, "email":item.store.data.email };
+		});*/
+		console.log(ids);
 		res.send(ids);
 	}else{
 		res.send({});
